@@ -1,9 +1,6 @@
 package com.example.wondertrackxd.controller.overview;
 
 import com.example.wondertrackxd.controller.model.RecentOrder;
-import io.github.palexdev.materialfx.controls.MFXTableColumn;
-import io.github.palexdev.materialfx.controls.MFXTableView;
-import io.github.palexdev.materialfx.controls.cell.MFXTableRowCell;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
@@ -80,7 +77,7 @@ import java.util.stream.Collectors;
 
 /**
  * Enhanced Controller for the Overview page that handles real-time analytics and KPI data
- * Manages MFX TableView, KPI cards, and charts with live data from orders.txt
+ * Manages TableView, KPI cards, and charts with live data from orders.txt
  * Provides comprehensive analytics dashboard with automatic data updates
  */
 public class OverviewController {

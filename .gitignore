@@ -1,28 +1,40 @@
-# Maven
-target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
-buildNumber.properties
-.mvn/timing.properties
-.mvn/wrapper/maven-wrapper.jar
+# WonderTrack JavaFX POS System - .gitignore
 
-# Compiled class file
+# Build outputs
+target/
+*.jar
+*.war
+*.ear
 *.class
 
-# Log file
+# IDE files
+.idea/
+.vscode/
+*.iml
+*.iws
+*.ipr
+
+# Maven wrapper
+.mvn/wrapper/maven-wrapper.jar
+
+# Logs
 *.log
+app.log
 
-# BlueJ files
-*.ctxt
+# OS files
+.DS_Store
+Thumbs.db
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+# Temporary files
+*.tmp
+*.temp
+*.swp
+*.swo
 
-# Package Files #
+# Java compiled classes
+*.class
+
+# Package files
 *.jar
 *.war
 *.nar
@@ -30,46 +42,3 @@ buildNumber.properties
 *.zip
 *.tar.gz
 *.rar
-
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
-
-# IDE
-.idea/
-*.iws
-*.iml
-*.ipr
-.vscode/
-.settings/
-.project
-.classpath
-
-# JavaFX
-build/
-dist/
-nbproject/private/
-nbbuild/
-nbdist/
-.nb-gradle/
-
-# OS
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
-
-# Temporary files
-*.tmp
-*.bak
-*.swp
-*~.nib
-
-# JavaFX specific
-*.fxbuild
-
-# Keep MaterialFX jar (since it's a dependency)
-!materialfx-11.17.0.jar

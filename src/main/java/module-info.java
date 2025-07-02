@@ -1,21 +1,18 @@
 module com.example.wondertrackxd {
+    // Core JavaFX modules (actually used)
     requires javafx.controls;
     requires javafx.fxml;
-    requires javafx.web;
     requires javafx.swing;
     requires java.logging;
 
-    requires com.dlsc.formsfx;
-    requires net.synedra.validatorfx;
-    requires org.kordamp.ikonli.javafx;
-    requires org.kordamp.bootstrapfx.core;
-    requires eu.hansolo.tilesfx;
-    requires MaterialFX;
+    // PDF generation (actually used)
     requires org.apache.pdfbox;
 
+    // Open packages for FXML injection
     opens com.example.wondertrackxd to javafx.fxml;
     opens com.example.wondertrackxd.controller to javafx.fxml;
     
+    // Export packages for module access
     exports com.example.wondertrackxd;
     exports com.example.wondertrackxd.controller;
     exports com.example.wondertrackxd.controller.overview;
