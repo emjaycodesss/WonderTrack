@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<ScrollPane fitToHeight="false" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: #FFFAEC; -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-insets: 0; -fx-border-insets: 0; -fx-padding: 0;" styleClass="custom-scroll-pane" stylesheets="@../css/new-table-style.css, @../css/scroll-fix.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wondertrackxd.controller.analytics.AnalyticsController">
+      <VBox spacing="15.0" style="-fx-background-color: #FFFAEC; -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-insets: 0; -fx-border-insets: 0;" styleClass="custom-vbox">
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+         
+
+         <!-- KPI Cards Row -->
+         <HBox maxHeight="120.0" minHeight="100.0" prefHeight="110.0" spacing="15.0">
+            <children>
+               <!-- Total Orders Card -->
+               <VBox prefHeight="100.0" style="-fx-background-color: fffefc; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+                  <padding>
+                     <Insets bottom="15.0" top="15.0" />
+                  </padding>
+                  <children>
+                     <HBox prefHeight="81.0" spacing="20.0">
+                        <padding>
+                           <Insets left="15.0" right="15.0" />
+                        </padding>
+                        <children>
+                           <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                              <children>
+                                 <Label text="Total Orders" textFill="#b4540a">
+                                    <font>
+                                       <Font name="Inter Semi Bold" size="15.0" />
+                                    </font>
+                                 </Label>
+                                 <Label fx:id="totalOrdersLabel" text="1,247" textFill="#92400d">
+                                    <font>
+                                       <Font name="Inter Extra Bold" size="20.0" />
+                                    </font>
+                                 </Label>
+                                 <Label text="94.2% completion rate" textFill="#d97708">
+                                    <font>
+                                       <Font name="Inter Semi Bold" size="10.0" />
+                                    </font>
+                                    <padding>
+                                       <Insets top="-6.0" />
+                                    </padding>
+                                 </Label>
+                              </children>
+                           </VBox>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+
+               <!-- Total Revenue Card -->
+               <VBox prefHeight="100.0" style="-fx-background-color: fffefc; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+                  <padding>
+                     <Insets bottom="15.0" top="15.0" />
+                  </padding>
+                  <children>
+                     <HBox prefHeight="81.0" spacing="20.0">
+                        <padding>
+                           <Insets left="15.0" right="15.0" />
+                        </padding>
+                        <children>
+                           <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                              <children>
+                                 <Label text="Total Revenue" textFill="#b4540a">
+                                    <font>
+                                       <Font name="Inter Semi Bold" size="15.0" />
+                                    </font>
+                                 </Label>
+                                 <Label fx:id="totalRevenueLabel" text="₱45,280" textFill="#92400d">
+                                    <font>
+                                       <Font name="Inter Extra Bold" size="20.0" />
+                                    </font>
+                                 </Label>
+                                 <Label text="+12.5% from last period" textFill="#22c55e">
+                                    <font>
+                                       <Font name="Inter Semi Bold" size="10.0" />
+                                    </font>
+                                    <padding>
+                                       <Insets top="-6.0" />
+                                    </padding>
+                                 </Label>
+                              </children>
+                           </VBox>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+
+               <!-- Avg Order Value Card -->
+               <VBox prefHeight="100.0" style="-fx-background-color: fffefc; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+                  <padding>
+                     <Insets bottom="15.0" top="15.0" />
+                  </padding>
+                  <children>
+                     <HBox prefHeight="81.0" spacing="20.0">
+                        <padding>
+                           <Insets left="15.0" right="15.0" />
+                        </padding>
+                        <children>
+                           <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                              <children>
+                                 <Label text="Avg Order Value" textFill="#b4540a">
+                                    <font>
+                                       <Font name="Inter Semi Bold" size="15.0" />
+                                    </font>
+                                 </Label>
+                                 <Label fx:id="avgOrderValueLabel" text="₱36.3" textFill="#92400d">
+                                    <font>
+                                       <Font name="Inter Extra Bold" size="20.0" />
+                                    </font>
+                                 </Label>
+                                 <Label text="Per transaction" textFill="#d97708">
+                                    <font>
+                                       <Font name="Inter Semi Bold" size="10.0" />
+                                    </font>
+                                    <padding>
+                                       <Insets top="-6.0" />
+                                    </padding>
+                                 </Label>
+                              </children>
+                           </VBox>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+
+               <!-- Customer Retention Card -->
+               <VBox prefHeight="100.0" style="-fx-background-color: fffefc; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+                  <padding>
+                     <Insets bottom="15.0" top="15.0" />
+                  </padding>
+                  <children>
+                     <HBox prefHeight="81.0" spacing="20.0">
+                        <padding>
+                           <Insets left="15.0" right="15.0" />
+                        </padding>
+                        <children>
+                           <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                              <children>
+                                 <Label text="Customer Retention" textFill="#b4540a">
+                                    <font>
+                                       <Font name="Inter Semi Bold" size="15.0" />
+                                    </font>
+                                 </Label>
+                                 <Label fx:id="customerRetentionLabel" text="68%" textFill="#92400d">
+                                    <font>
+                                       <Font name="Inter Extra Bold" size="20.0" />
+                                    </font>
+                                 </Label>
+                                 <Label text="Returning customers" textFill="#d97708">
+                                    <font>
+                                       <Font name="Inter Semi Bold" size="10.0" />
+                                    </font>
+                                    <padding>
+                                       <Insets top="-6.0" />
+                                    </padding>
+                                 </Label>
+                              </children>
+                           </VBox>
+                        </children>
+                     </HBox>
+                  </children>
+               </VBox>
+            </children>
+         </HBox>
+         
+         <!-- Charts Row 1 -->
+         <HBox maxHeight="400.0" minHeight="350.0" prefHeight="380.0" spacing="15.0">
+            <children>
+               <!-- Daily Sales Trend -->
+               <VBox maxWidth="Infinity" minWidth="0.0" prefHeight="380.0" style="-fx-background-color: fffefb; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+                  <padding>
+                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                  </padding>
+                  <children>
+                     <Label text="Daily Sales Trend" textFill="#8b4513">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Label>
+                     <LineChart fx:id="dailySalesChart" prefHeight="300.0" VBox.vgrow="ALWAYS">
+                        <xAxis>
+                           <CategoryAxis side="BOTTOM" />
+                        </xAxis>
+                        <yAxis>
+                           <NumberAxis side="LEFT" />
+                        </yAxis>
+                     </LineChart>
+                  </children>
+               </VBox>
+               
+               <!-- Revenue per Flavor -->
+               <VBox maxWidth="Infinity" minWidth="0.0" prefHeight="380.0" style="-fx-background-color: fffefb; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+                  <padding>
+                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                  </padding>
+                  <children>
+                     <Label text="Revenue per Flavor" textFill="#8b4513">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Label>
+                     <PieChart prefHeight="300.0" VBox.vgrow="ALWAYS" />
+                  </children>
+               </VBox>
+            </children>
+         </HBox>
+         
+         <!-- Charts Row 2 -->
+         <HBox maxHeight="400.0" minHeight="350.0" prefHeight="380.0" spacing="15.0">
+            <children>
+               <!-- Top Selling Flavors -->
+               <VBox maxWidth="Infinity" minWidth="0.0" prefHeight="380.0" style="-fx-background-color: fffefb; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+         <padding>
+                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+         <children>
+                     <Label text="Top Selling Flavors" textFill="#8b4513">
+               <font>
+                           <Font size="15.0" />
+               </font>
+            </Label>
+                     <BarChart prefHeight="300.0" VBox.vgrow="ALWAYS">
+                        <xAxis>
+                           <NumberAxis side="BOTTOM" />
+                        </xAxis>
+                        <yAxis>
+                           <CategoryAxis side="LEFT" />
+                        </yAxis>
+                     </BarChart>
+                  </children>
+               </VBox>
+               
+               <!-- Monthly Revenue Trend -->
+               <VBox maxWidth="Infinity" minWidth="0.0" prefHeight="380.0" style="-fx-background-color: fffefb; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+                  <padding>
+                     <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                  </padding>
+                  <children>
+                     <Label text="Monthly Revenue Trend" textFill="#8b4513">
+               <font>
+                           <Font size="15.0" />
+               </font>
+            </Label>
+                     <BarChart prefHeight="300.0" VBox.vgrow="ALWAYS">
+                        <xAxis>
+                           <CategoryAxis side="BOTTOM" />
+                        </xAxis>
+                        <yAxis>
+                           <NumberAxis side="LEFT" />
+                        </yAxis>
+                     </BarChart>
+                  </children>
+               </VBox>
+            </children>
+         </HBox>
+         
+         <!-- Performance Insights Section -->
+         <VBox maxHeight="500.0" spacing="15.0" style="-fx-background-color: fffefb; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;">
+            <padding>
+               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            </padding>
+            <children>
+               <HBox alignment="CENTER_LEFT" spacing="10.0">
+                  <children>
+                     <Label text="Performance Insights" textFill="#8b4513">
+                        <font>
+                           <Font size="15.0" />
+                        </font>
+                     </Label>
+                  </children>
+               </HBox>
+               
+               <HBox spacing="15.0">
+                  <children>
+                     <!-- Best Selling Item -->
+                     <VBox prefHeight="100.0" style="-fx-background-color: fffefc; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+                        <padding>
+                           <Insets bottom="15.0" top="15.0" />
+                        </padding>
+                        <children>
+                           <HBox prefHeight="81.0" spacing="20.0">
+                              <padding>
+                                 <Insets left="15.0" right="15.0" />
+                              </padding>
+                              <children>
+                                 <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                                    <children>
+                                       <Label text="Best Selling Item" textFill="#b4540a">
+                                          <font>
+                                             <Font name="Inter Semi Bold" size="15.0" />
+                                          </font>
+                                       </Label>
+                                       <Label fx:id="bestSellingItemLabel" text="Berry on top" textFill="#92400d">
+                                          <font>
+                                             <Font name="Inter Extra Bold" size="20.0" />
+                                          </font>
+                                       </Label>
+                                       <Label text="145 units sold this week" textFill="#d97708">
+                                          <font>
+                                             <Font name="Inter Semi Bold" size="10.0" />
+                                          </font>
+                                          <padding>
+                                             <Insets top="-6.0" />
+                                          </padding>
+                                       </Label>
+                                    </children>
+                                 </VBox>
+                              </children>
+                           </HBox>
+                        </children>
+                     </VBox>
+                     
+                     <!-- Completion Rate -->
+                     <VBox prefHeight="100.0" style="-fx-background-color: fffefc; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+                        <padding>
+                           <Insets bottom="15.0" top="15.0" />
+                        </padding>
+                        <children>
+                           <HBox prefHeight="81.0" spacing="20.0">
+                              <padding>
+                                 <Insets left="15.0" right="15.0" />
+                              </padding>
+                              <children>
+                                 <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                                    <children>
+                                       <Label text="Completion Rate" textFill="#b4540a">
+                                          <font>
+                                             <Font name="Inter Semi Bold" size="15.0" />
+                                          </font>
+                                       </Label>
+                                       <Label fx:id="completionRateLabel" text="68%" textFill="#92400d">
+                                          <font>
+                                             <Font name="Inter Extra Bold" size="20.0" />
+                                          </font>
+                                       </Label>
+                                       <Label text="percentage of completion" textFill="#d97708">
+                                          <font>
+                                             <Font name="Inter Semi Bold" size="10.0" />
+                                          </font>
+                                          <padding>
+                                             <Insets top="-6.0" />
+                                          </padding>
+                                       </Label>
+                                    </children>
+                                 </VBox>
+                              </children>
+                           </HBox>
+                        </children>
+                     </VBox>
+                     
+                     <!-- Growth Rate -->
+                     <VBox prefHeight="100.0" style="-fx-background-color: fffefc; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+                        <padding>
+                           <Insets bottom="15.0" top="15.0" />
+                        </padding>
+                        <children>
+                           <HBox prefHeight="81.0" spacing="20.0">
+                              <padding>
+                                 <Insets left="15.0" right="15.0" />
+                              </padding>
+                              <children>
+                                 <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                                    <children>
+                                       <Label text="Growth Rate" textFill="#b4540a">
+                                          <font>
+                                             <Font name="Inter Semi Bold" size="15.0" />
+                                          </font>
+                                       </Label>
+                                       <Label fx:id="growthRateLabel" text="+12.5%" textFill="#22c55e">
+                                          <font>
+                                             <Font name="Inter Extra Bold" size="20.0" />
+                                          </font>
+                                       </Label>
+                                       <Label text="Compared to last period" textFill="#d97708">
+                                          <font>
+                                             <Font name="Inter Semi Bold" size="10.0" />
+                                          </font>
+                                          <padding>
+                                             <Insets top="-6.0" />
+                                          </padding>
+                                       </Label>
+                                    </children>
+                                 </VBox>
+                              </children>
+                           </HBox>
+                        </children>
+                     </VBox>
+                  </children>
+               </HBox>
+            </children>
+         </VBox>
+      </VBox>
+</ScrollPane>

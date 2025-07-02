@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="500.0" prefWidth="400.0" style="-fx-background-color: #FFFBE9; -fx-background-radius: 3;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wondertrackxd.controller.LoginController">
+
+   <Button fx:id="signInButton" layoutX="25.0" layoutY="428.0" mnemonicParsing="false" onAction="#handleSignIn" prefHeight="40.0" prefWidth="349.0" style="-fx-background-color: #CF8032;" text="Sign In" textFill="#fffef9">
+      <font>
+         <Font name="Inter Bold" size="18.0" />
+      </font>
+   </Button>
+
+   <Label alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="57.0" layoutY="198.0" prefHeight="43.0" prefWidth="287.0" text="WonderTrack" textAlignment="CENTER" textFill="#78350f" AnchorPane.topAnchor="198.0">
+      <font>
+         <Font name="Inter Bold" size="35.0" />
+      </font></Label>
+
+   <VBox layoutX="25.0" layoutY="280.0" prefHeight="40.0" prefWidth="349.0" spacing="3.0">
+      <children>
+         <Label text="Username" textFill="#a16207">
+            <font>
+               <Font name="Inter Bold" size="15.0" />
+            </font>
+         </Label>
+         <HBox prefHeight="157.0" prefWidth="349.0" style="-fx-background-color: #FFFEF9; -fx-border-radius: 4; -fx-background-radius: 4; -fx-border-color: #FDE68A;">
+            <children>
+               <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../icons/username_icon.png" />
+                  </image>
+                  <HBox.margin>
+                     <Insets left="12.0" top="8.0" />
+                  </HBox.margin>
+               </ImageView>
+               <TextField fx:id="usernameField" prefHeight="117.0" prefWidth="349.0" promptText="Enter your username" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+                  <font>
+                     <Font name="Inter Regular" size="15.0" />
+                  </font>
+               </TextField>
+            </children>
+         </HBox>
+      </children>
+   </VBox>
+
+   <VBox layoutX="25.0" layoutY="350.0" prefHeight="55.0" prefWidth="349.0" spacing="3.0">
+      <children>
+         <Label text="Password" textFill="#a16207">
+            <font>
+               <Font name="Inter Bold" size="15.0" />
+            </font>
+         </Label>
+         <HBox prefHeight="157.0" prefWidth="349.0" style="-fx-background-color: #FFFEF9; -fx-border-radius: 4; -fx-background-radius: 4; -fx-border-color: #FDE68A;">
+            <children>
+               <ImageView fitHeight="15.0" fitWidth="15.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../icons/password_icon.png" />
+                  </image>
+                  <HBox.margin>
+                     <Insets left="12.0" top="8.0" />
+                  </HBox.margin>
+               </ImageView>
+               <HBox alignment="CENTER_LEFT" prefHeight="59.0" prefWidth="320.0">
+                  <children>
+                     <StackPane HBox.hgrow="ALWAYS">
+                        <children>
+                           <TextField fx:id="visiblePasswordField" prefHeight="47.0" promptText="Enter your password" style="-fx-background-color: transparent;" visible="false">
+                              <font>
+                                 <Font name="Inter Regular" size="15.0" />
+                              </font>
+                           </TextField>
+                           <PasswordField fx:id="passwordField" prefHeight="31.0" promptText="Enter your password" style="-fx-background-color: transparent;" visible="true">
+                              <font>
+                                 <Font name="Inter Regular" size="15.0" />
+                              </font>
+                           </PasswordField>
+                        </children>
+                     </StackPane>
+                     <Button fx:id="togglePasswordVisibility" mnemonicParsing="false" onAction="#togglePasswordVisibility" prefHeight="30.0" prefWidth="30.0" style="-fx-background-color: transparent; -fx-border-color: transparent; -fx-cursor: hand;">
+                        <graphic>
+                           <ImageView fx:id="eyeIcon" fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../icons/open_eye_icon.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                        <HBox.margin>
+                           <Insets right="8.0" />
+                        </HBox.margin>
+                     </Button>
+                  </children>
+               </HBox>
+            </children>
+         </HBox>
+      </children>
+   </VBox>
+
+   <Label alignment="BASELINE_CENTER" layoutX="126.0" layoutY="241.0" text="Sign in to your account" textFill="#a16207">
+      <font>
+         <Font name="Inter Regular" size="15.0" />
+      </font>
+   </Label>
+
+   <StackPane layoutX="120.0" layoutY="31.0" prefHeight="106.0" prefWidth="128.0">
+      <children>
+         <Ellipse fill="#78350f" radiusX="60.0" radiusY="57.0" stroke="#78350f" strokeType="OUTSIDE" strokeWidth="20.0" />
+         <ImageView fitHeight="153.0" fitWidth="157.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+               <Image url="@../images/wonderpoffles_logo.png" />
+            </image>
+         </ImageView>
+      </children>
+   </StackPane>
+
+</AnchorPane>

@@ -1,0 +1,71 @@
+# WonderTrack Sales Database
+# ===========================================
+# COMPLETED SALES TRANSACTIONS ONLY
+# This file contains only finalized sales for revenue tracking and analytics
+# 
+# Format: Sale ID, Order ID, Customer Name, Contact Number, Items Sold, Total Items, Sale Amount, Payment Method, Sale Date/Time, Payment Reference, Cash Received
+# 
+# Field Descriptions:
+# - Sale ID: Unique sales identifier (WPS + YYYYMMDD + sequence number)
+# - Order ID: Reference to original order (WP + YYYYMMDD + sequence)
+# - Customer Name: Full name of the customer
+# - Contact Number: Customer's phone number
+# - Items Sold: List of items with quantities (format: "quantity x item name")
+# - Total Items: Total number of items sold
+# - Sale Amount: Final transaction amount in Philippine Peso (₱)
+# - Payment Method: Cash, GCash, or Maya
+# - Sale Date/Time: When the sale was completed
+# - Payment Reference: Required for GCash/Maya (transaction reference), empty for Cash
+# - Cash Received: Required for Cash payments (amount received), 0.00 for digital payments
+# 
+# SALES TRACKING FEATURES:
+# ✅ Revenue Analytics - Track daily, weekly, monthly sales
+# ✅ Payment Method Trends - Monitor Cash vs Digital payments  
+# ✅ Product Performance - Analyze best-selling items
+# ✅ Customer Analytics - Identify repeat customers
+# ✅ Financial Reporting - Generate sales reports
+# ✅ Growth Analysis - Compare periods for business insights
+# 
+# Last Updated: January 2025
+# ===========================================
+
+WPS20250624-007,WP20250624-007,jajaja,091231313,"5x Tropiham; 3x Pimiento; 7x Eggmayoza",15,₱725.00,Cash,"Jun 24, 2025 9:09 PM","",750.00
+WPS20250624-006,WP20250624-006,asfafafaf,0913414141,"4x Spicy tunasaur; 4x Berry on top",8,₱360.00,GCash,"Jun 24, 2025 7:54 PM","GC73242",0.00
+WPS20250624-005,WP20250624-005,memmei,09123114141,"4x Tropiham; 4x Spicy tunasaur",8,₱400.00,GCash,"Jun 24, 2025 7:39 PM","GC86632",0.00
+WPS20250624-004,WP20250624-004,afafafaf,091241414,"4x Eggmayoza",4,₱180.00,Cash,"Jun 24, 2025 6:40 PM","",200.00
+WPS20250624-003,WP20250624-003,afafaf,0912341414,"4x Spicy tunasaur",4,₱180.00,Cash,"Jun 24, 2025 3:38 PM","",200.00
+WPS20250624-002,WP20250624-002,masdad,091231313,"4x Eggmayoza",4,₱180.00,Cash,"Jun 24, 2025 1:21 PM","",200.00
+WPS20250624-001,WP20250624-001,mmjj,099678678,"4x Spicy tunasaur",4,₱180.00,Cash,"Jun 24, 2025 12:21 PM","",200.00
+WPS20250623-012,WP20250623-012,Maria Santos,09987654321,"6x Tropiham; 2x Berry on top",8,₱420.00,Maya,"Jun 23, 2025 8:30 PM","MY789456123012",0.00
+WPS20250623-011,WP20250623-011,John Dela Cruz,09876543210,"3x Eggmayoza; 5x Spicy tunasaur; 2x Oreo-verload",10,₱540.00,Cash,"Jun 23, 2025 7:45 PM","",600.00
+WPS20250623-010,WP20250623-010,Ana Reyes,09765432109,"8x Pimiento; 4x Berry on top",12,₱540.00,GCash,"Jun 23, 2025 6:20 PM","GC456789123456",0.00
+WPS20250623-009,WP20250623-009,Mark Gonzales,09654321098,"2x Tropiham; 6x Spicy tunasaur",8,₱380.00,Cash,"Jun 23, 2025 5:15 PM","",400.00
+WPS20250623-008,WP20250623-008,Lisa Chen,09543210987,"4x Oreo-verload; 3x Berry on top",7,₱315.00,Maya,"Jun 23, 2025 4:30 PM","MY321654987012",0.00
+WPS20250623-007,WP20250623-007,Robert Kim,09432109876,"5x Eggmayoza; 3x Pimiento",8,₱360.00,GCash,"Jun 23, 2025 3:45 PM","GC987123456789",0.00
+WPS20250623-006,WP20250623-006,Sarah Lopez,09321098765,"7x Spicy tunasaur; 1x Tropiham",8,₱370.00,Cash,"Jun 23, 2025 2:20 PM","",400.00
+WPS20250623-005,WP20250623-005,David Wilson,09210987654,"3x Berry on top; 4x Oreo-verload; 2x Eggmayoza",9,₱405.00,Maya,"Jun 23, 2025 1:35 PM","MY654321987012",0.00
+WPS20250623-004,WP20250623-004,Emma Garcia,09109876543,"6x Pimiento; 2x Spicy tunasaur",8,₱360.00,Cash,"Jun 23, 2025 12:50 PM","",400.00
+WPS20250623-003,WP20250623-003,Michael Brown,09098765432,"4x Tropiham; 3x Berry on top; 1x Eggmayoza",8,₱400.00,GCash,"Jun 23, 2025 11:25 AM","GC741852963012",0.00
+WPS20250623-002,WP20250623-002,Jessica Davis,09987654321,"5x Oreo-verload; 2x Pimiento",7,₱315.00,Cash,"Jun 23, 2025 10:40 AM","",350.00
+WPS20250623-001,WP20250623-001,Carlos Rodriguez,09876543210,"8x Eggmayoza; 4x Spicy tunasaur",12,₱540.00,Maya,"Jun 23, 2025 9:15 AM","MY852963741012",0.00
+WPS20250622-015,WP20250622-015,Linda Wang,09765432109,"3x Tropiham; 6x Berry on top; 3x Pimiento",12,₱540.00,GCash,"Jun 22, 2025 9:30 PM","GC159753468012",0.00
+WPS20250622-014,WP20250622-014,Antonio Martinez,09654321098,"4x Spicy tunasaur; 5x Oreo-verload",9,₱405.00,Cash,"Jun 22, 2025 8:45 PM","",450.00
+WPS20250622-013,WP20250622-013,Rachel Green,09543210987,"7x Eggmayoza; 2x Tropiham",9,₱425.00,Maya,"Jun 22, 2025 7:20 PM","MY357159468012",0.00
+WPS20250622-012,WP20250622-012,James Taylor,09432109876,"5x Pimiento; 4x Berry on top; 3x Spicy tunasaur",12,₱540.00,GCash,"Jun 22, 2025 6:35 PM","GC468159357012",0.00
+WPS20250622-011,WP20250622-011,Monica Bing,09321098765,"2x Oreo-verload; 6x Eggmayoza",8,₱360.00,Cash,"Jun 22, 2025 5:50 PM","",400.00
+WPS20250622-010,WP20250622-010,Kevin Lee,09210987654,"4x Tropiham; 4x Spicy tunasaur; 2x Berry on top",10,₱470.00,Maya,"Jun 22, 2025 4:15 PM","MY579135486012",0.00
+WPS20250620-002,WP20250620-002,mario,09967890123,"1x Spicy tunasaur; 3x Berry on top; 3x Pimiento",7,₱315.00,GCash,"Jun 20, 2025 6:09 PM","GC123124234234",0.00
+WPS20250620-001,WP20250620-001,sefsf,09956789012,"20x Tropiham",20,₱1100.00,GCash,"Jun 20, 2025 1:49 PM","GC124567890123",0.00
+WPS20250618-001,WP20250618-001,meiiii,09945678901,"3x Pimiento",3,₱135.00,GCash,"Jun 18, 2025 10:05 PM","GC987654321098",0.00
+WPS20250617-008,WP20250617-008,adad,09934567890,"3x Eggmayoza; 4x Pimiento",7,₱315.00,Maya,"Jun 17, 2025 4:33 PM","MY456789012345",0.00
+WPS20250617-007,WP20250617-007,rrr,09923456789,"2x Tropiham; 3x Oreo-verload",5,₱245.00,Cash,"Jun 17, 2025 2:31 PM","",300.00
+WPS20250617-006,WP20250617-006,kkk,09912345678,"3x Pimiento",3,₱135.00,GCash,"Jun 17, 2025 2:29 PM","GC789012345678",0.00
+WPS20250617-005,WP20250617-005,tyler,09901234567,"5x Berry on top; 5x Pimiento; 1x Berry on top",11,₱495.00,Maya,"Jun 17, 2025 2:04 PM","MY321098765432",0.00
+WPS20250617-004,WP20250617-004,juls,09890123456,"4x Spicy tunasaur; 3x Tropiham; 4x S'morelicious",11,₱565.00,GCash,"Jun 17, 2025 2:03 PM","GC654321098765",0.00
+WPS20250617-003,WP20250617-003,baste,09789012345,"3x Tropiham",3,₱165.00,Cash,"Jun 17, 2025 10:13 AM","",200.00
+WPS20250617-002,WP20250617-002,hello,09678901234,"2x Tropiham; 1x S'morelicious; 4x Spicy tunasaur",7,₱345.00,Cash,"Jun 17, 2025 10:01 AM","",400.00
+WPS20250617-001,WP20250617-001,anon,09567890123,"2x Tropiham",2,₱110.00,Maya,"Jun 17, 2025 9:47 AM","MY147258369012",0.00
+WPS20250127-001,WP20250127-001,Mama Moe,09123456789,"2x Oreo-verload",2,₱90.00,GCash,"Jan 27, 2025 12:30 PM","GC258369147012",0.00
+WPS20250126-001,WP20250126-001,Watdaheli,09234567890,"1x Eggmayoza; 1x Pimiento",2,₱90.00,Cash,"Jan 26, 2025 3:45 PM","",100.00
+WPS20250125-002,WP20250125-002,Chacha,09456789012,"1x Eggmayoza; 1x Pimiento",2,₱90.00,Maya,"Jan 25, 2025 2:20 PM","MY369147258012",0.00
+WPS20250125-001,WP20250125-001,Memmei,09345678901,"1x Eggmayoza; 1x Pimiento",2,₱90.00,GCash,"Jan 25, 2025 10:15 AM","GC471258369012",0.00

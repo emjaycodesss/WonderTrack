@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxWidth="215.0" minHeight="-Infinity" minWidth="215.0" prefHeight="720.0" prefWidth="215.0" style="-fx-background-color: #FFF9ED; -fx-border-color: #FDE68A; -fx-border-width: 0 1px 0 0; -fx-border-style: solid;" styleClass="sidebar-container" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wondertrackxd.controller.sidebar.SidebarController">
+   <children>
+
+      <VBox fx:id="navigationSection" prefHeight="197.0" prefWidth="215.0" spacing="5.0">
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+         <children>
+            <Label text="Navigation" textFill="#b4540a">
+               <VBox.margin>
+                  <Insets left="15.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Inter Extra Bold" size="10.0" />
+               </font>
+            </Label>
+            <ToggleButton fx:id="dashboardButton" alignment="CENTER_LEFT" graphicTextGap="10.0" mnemonicParsing="false" onAction="#handleDashboard" prefHeight="31.0" prefWidth="195.0" style="-fx-background-color: transparent;" text="Overview" textFill="#78350f">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Inter Medium" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/overview_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </ToggleButton>
+            <ToggleButton fx:id="ordersButton" alignment="CENTER_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="27.0" mnemonicParsing="false" onAction="#handleOrders" prefHeight="31.0" prefWidth="195.0" style="-fx-background-color: transparent;" text="Orders" textFill="#78350f">
+               <font>
+                  <Font name="Inter Medium" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/orders_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </ToggleButton>
+            <ToggleButton fx:id="salesButton" alignment="CENTER_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="61.0" mnemonicParsing="false" onAction="#handleSales" prefHeight="31.0" prefWidth="195.0" style="-fx-background-color: transparent;" text="Sales" textFill="#78350f">
+               <font>
+                  <Font name="Inter Medium" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/sales_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </ToggleButton>
+            <ToggleButton fx:id="productsButton" alignment="CENTER_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="95.0" mnemonicParsing="false" onAction="#handleProducts" prefHeight="31.0" prefWidth="195.0" style="-fx-background-color: transparent;" text="Products" textFill="#78350f">
+               <font>
+                  <Font name="Inter Medium" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/products_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </ToggleButton>
+            <ToggleButton fx:id="analyticsButton" alignment="CENTER_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="129.0" mnemonicParsing="false" onAction="#handleAnalytics" prefHeight="31.0" prefWidth="195.0" style="-fx-background-color: transparent;" text="Analytics" textFill="#78350f">
+               <font>
+                  <Font name="Inter Medium" size="16.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="15.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/analytics_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" />
+               </VBox.margin>
+            </ToggleButton>
+
+         </children></VBox>
+      <Pane prefHeight="245.0" prefWidth="215.0" VBox.vgrow="ALWAYS" />
+      <VBox fx:id="userSection" prefHeight="203.0" prefWidth="215.0" style="-fx-background-color: transparent; -fx-border-color: FDE68A; -fx-border-width: 1 0 0 0;">
+         <children>
+            <HBox fx:id="userCard" alignment="CENTER" prefHeight="64.0" prefWidth="185.0" spacing="5.0" style="-fx-border-color: FDE68A; -fx-background-color: fffbeb; -fx-border-radius: 4; -fx-background-radius: 4;">
+               <VBox.margin>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="17.0" />
+               </VBox.margin>
+               <children>
+                  <StackPane prefHeight="62.0" prefWidth="34.0">
+                     <children>
+                        <Circle fill="#d97708" radius="18.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+                        <ImageView fitHeight="25.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/usercard_icon.png" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </StackPane>
+                  <VBox alignment="CENTER" prefHeight="62.0" prefWidth="76.0" spacing="1.0">
+                     <children>
+                        <Label text="Username" textFill="#78350f">
+                           <font>
+                              <Font name="Inter Medium" size="13.0" />
+                           </font></Label>
+                        <Label alignment="CENTER" prefHeight="17.0" prefWidth="53.0" style="-fx-background-color: fde68a; -fx-background-radius: 10;" text="admin" textFill="#78350f">
+                           <font>
+                              <Font name="Inter Medium" size="11.0" />
+                           </font></Label>
+                     </children>
+                  </VBox>
+               </children></HBox>
+            <Button fx:id="logoutButton" alignment="CENTER" graphicTextGap="8.0" mnemonicParsing="false" onAction="#handleLogout" prefHeight="31.0" prefWidth="185.0" style="-fx-background-color: fef2f2; -fx-border-color: fecaca; -fx-background-radius: 4; -fx-border-radius: 4;" text="Log Out" textFill="#b91c1b">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitHeight="13.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../icons/logout_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Inter Medium" size="13.0" />
+               </font></Button>
+            <VBox alignment="CENTER" prefHeight="56.0" prefWidth="185.0" style="-fx-border-color: FDE68A; -fx-border-width: 1 0 0 0; -fx-spacing: -1;">
+               <VBox.margin>
+                  <Insets left="15.0" right="15.0" top="15.0" />
+               </VBox.margin>
+               <children>
+                  <Label alignment="CENTER" prefHeight="2.0" prefWidth="185.0" text="WonderPoffles © 2025" textFill="#d97708">
+                     <font>
+                        <Font name="Inter Regular" size="13.0" />
+                     </font></Label>
+                  <Label alignment="CENTER" prefHeight="0.0" prefWidth="185.0" text="Where Flavor Meets Wonder" textFill="#d97708">
+                     <font>
+                        <Font name="Inter Regular" size="11.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets bottom="10.0" top="5.0" />
+               </padding>
+            </VBox>
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin></VBox>
+   </children>
+</VBox>

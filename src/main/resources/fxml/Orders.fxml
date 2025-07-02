@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.SpinnerValueFactory.IntegerSpinnerValueFactory?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToHeight="false" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: #FFFAEC; -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-insets: 0; -fx-border-insets: 0; -fx-padding: 0;" styleClass="custom-scroll-pane" stylesheets="@../css/new-table-style.css, @../css/scroll-fix.css, @../css/form-fix.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wondertrackxd.controller.orders.OrdersController">
+   <VBox minHeight="0.0" spacing="20.0" style="-fx-background-color: #FFFAEC; -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-insets: 0; -fx-border-insets: 0;" styleClass="custom-vbox">
+      <padding>
+         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+      </padding>
+      
+      <!-- Order Creation Form Section -->
+      <GridPane hgap="15.0" maxWidth="Infinity">
+         <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0" />
+            <ColumnConstraints hgrow="ALWAYS" percentWidth="50.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+         </rowConstraints>
+         
+         <!-- Order Form (50% width) -->
+         <VBox fx:id="orderFormContainer" spacing="15.0" style="-fx-background-color: #fffefb; -fx-border-color: #fde998; -fx-background-radius: 6; -fx-border-radius: 6;" GridPane.columnIndex="0" VBox.vgrow="ALWAYS">
+            <padding>
+               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            </padding>
+            <children>
+               <Label text="Create New Order" textFill="#92400d">
+                  <font>
+                     <Font name="Inter Extra Bold" size="20.0" />
+                  </font>
+               </Label>
+               
+               <!-- Customer Name -->
+               <VBox spacing="5.0">
+                  <children>
+                     <Label text="Customer Name" textFill="#c24c00">
+                        <font>
+                           <Font name="Inter Medium" size="13.0" />
+                        </font>
+                     </Label>
+                     <TextField fx:id="customerNameField" promptText="Enter customer name" style="-fx-background-color: white; -fx-border-color: #ffe680; -fx-border-width: 1px; -fx-background-radius: 4px; -fx-border-radius: 4px; -fx-pref-height: 35;" />
+                  </children>
+               </VBox>
+               
+               <!-- Contact Number -->
+               <VBox spacing="5.0">
+                  <children>
+                     <Label text="Contact Number" textFill="#c24c00">
+                        <font>
+                           <Font name="Inter Medium" size="13.0" />
+                        </font>
+                     </Label>
+                     <TextField fx:id="contactNumberField" promptText="Enter contact number" style="-fx-background-color: white; -fx-border-color: #ffe680; -fx-border-width: 1px; -fx-background-radius: 4px; -fx-border-radius: 4px; -fx-pref-height: 35;" />
+                  </children>
+               </VBox>
+               
+               <!-- Payment Method -->
+               <VBox spacing="5.0">
+                  <children>
+                     <Label text="Payment Method" textFill="#c24c00">
+                        <font>
+                           <Font name="Inter Medium" size="13.0" />
+                        </font>
+                     </Label>
+                     <ComboBox fx:id="paymentMethodCombo" maxWidth="Infinity" promptText="Select payment method" style="-fx-background-color: white; -fx-border-color: #ffe680; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-background-radius: 4px; -fx-pref-height: 35;" />
+                  </children>
+               </VBox>
+               
+               <!-- Digital Payment Details (Maya/GCash) - Initially Hidden -->
+               <VBox fx:id="digitalPaymentContainer" managed="false" spacing="5.0" visible="false">
+                  <children>
+                     <GridPane hgap="10.0">
+                        <columnConstraints>
+                           <ColumnConstraints percentWidth="50.0" />
+                           <ColumnConstraints percentWidth="50.0" />
+                        </columnConstraints>
+                        <rowConstraints>
+                           <RowConstraints />
+                        </rowConstraints>
+                        <children>
+                           <VBox spacing="3.0" GridPane.columnIndex="0">
+                              <children>
+                                 <Label text="Reference Number" textFill="#c24c00">
+                                    <font>
+                                       <Font name="Inter Medium" size="13.0" />
+                                    </font>
+                                 </Label>
+                                 <TextField fx:id="referenceNumberField" promptText="Enter reference number" style="-fx-background-color: white; -fx-border-color: #ffe680; -fx-border-width: 1px; -fx-background-radius: 4px; -fx-border-radius: 4px; -fx-pref-height: 35;" />
+                              </children>
+                           </VBox>
+                           <VBox spacing="3.0" GridPane.columnIndex="1">
+                              <children>
+                                 <Label text="Timestamp" textFill="#c24c00">
+                                    <font>
+                                       <Font name="Inter Medium" size="13.0" />
+                                    </font>
+                                 </Label>
+                                 <TextField fx:id="timestampField" promptText="e.g. 01/26/2025 2:30 PM" style="-fx-background-color: white; -fx-border-color: #ffe680; -fx-border-width: 1px; -fx-background-radius: 4px; -fx-border-radius: 4px; -fx-pref-height: 35;" />
+                              </children>
+                           </VBox>
+                        </children>
+                     </GridPane>
+                  </children>
+               </VBox>
+               
+               <!-- Cash Payment Details - Initially Hidden -->
+               <VBox fx:id="cashPaymentContainer" managed="false" spacing="5.0" visible="false">
+                  <children>
+                     <VBox spacing="3.0">
+                        <children>
+                           <Label text="Cash Received" textFill="#c24c00">
+                              <font>
+                                 <Font name="Inter Medium" size="13.0" />
+                              </font>
+                           </Label>
+                           <TextField fx:id="cashReceivedField" promptText="Enter cash amount received" style="-fx-background-color: white; -fx-border-color: #ffe680; -fx-border-width: 1px; -fx-background-radius: 4px; -fx-border-radius: 4px; -fx-pref-height: 35;" />
+                        </children>
+                     </VBox>
+                  </children>
+               </VBox>
+               
+               <!-- Order Items Section -->
+               <HBox alignment="CENTER" spacing="10.0">
+                  <children>
+                     <Label text="Order Items" textFill="#c24c00">
+                        <font>
+                           <Font name="Inter Extra Bold" size="15.0" />
+                        </font>
+                     </Label>
+                     <Region HBox.hgrow="ALWAYS" />
+                     <Button fx:id="addItemButton" styleClass="action-button" text="+ Add Item" textFill="WHITE">
+                        <font>
+                           <Font name="Inter Medium" size="13.0" />
+                        </font>
+                     </Button>
+                     <Button fx:id="clearButton" style="-fx-border-color: #ffe680; -fx-background-color: #fffbe9; -fx-background-radius: 4; -fx-border-radius: 4;" text="Clear" textFill="#e87000">
+                        <font>
+                           <Font name="Inter Medium" size="13.0" />
+                        </font>
+                     </Button>
+                  </children>
+                  <VBox.margin>
+                     <Insets bottom="5.0" top="10.0" />
+                  </VBox.margin>
+               </HBox>
+               
+               <!-- Item Input Container for dynamic items -->
+               <VBox fx:id="itemInputContainer" spacing="10.0">
+                  <!-- Initial item input row -->
+                  <VBox spacing="8.0" style="-fx-background-color: #FFFBE9; -fx-background-radius: 4; -fx-padding: 10;">
+                     <children>
+                        <GridPane hgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints percentWidth="50.0" />
+                              <ColumnConstraints percentWidth="50.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints />
+                           </rowConstraints>
+                           <children>
+                              <VBox spacing="3.0" GridPane.columnIndex="0">
+                                 <children>
+                                    <Label text="Category" textFill="#c24c00">
+                                       <font>
+                                          <Font name="Inter Medium" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="categoryCombo" maxWidth="Infinity" promptText=" Select category" style="-fx-background-color: white; -fx-border-color: #ffe680; -fx-border-width: 1px; -fx-background-radius: 4px; -fx-border-radius: 4px; -fx-pref-height: 35;" />
+                                 </children>
+                              </VBox>
+                              <VBox spacing="3.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <Label text="Flavor" textFill="#c24c00">
+                                       <font>
+                                          <Font name="Inter Medium" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="flavorCombo" maxWidth="Infinity" promptText="Select Flavor" style="-fx-background-color: white; -fx-border-color: #ffe680; -fx-border-width: 1px; -fx-background-radius: 4px; -fx-border-radius: 4px; -fx-pref-height: 35;" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </GridPane>
+                        <GridPane hgap="10.0">
+                           <columnConstraints>
+                              <ColumnConstraints percentWidth="25.0" />
+                              <ColumnConstraints percentWidth="25.0" />
+                              <ColumnConstraints percentWidth="50.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints />
+                           </rowConstraints>
+                           <children>
+                              <VBox spacing="3.0" GridPane.columnIndex="0">
+                                 <children>
+                                    <Label text="Quantity" textFill="#c24c00">
+                                       <font>
+                                          <Font name="Inter Medium" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <Spinner fx:id="quantitySpinner" maxWidth="Infinity" style="-fx-background-color: white; -fx-border-color: #ffe680; -fx-border-width: 1px; -fx-border-radius: 4px; -fx-background-radius: 4px; -fx-pref-height: 35;">
+                                       <valueFactory>
+                                          <SpinnerValueFactory.IntegerSpinnerValueFactory initialValue="1" max="100" min="1" />
+                                       </valueFactory>
+                                    </Spinner>
+                                 </children>
+                              </VBox>
+                              <VBox spacing="3.0" GridPane.columnIndex="1">
+                                 <children>
+                                    <Label text="Price" textFill="#c24c00">
+                                       <font>
+                                          <Font name="Inter Medium" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="priceField" editable="false" focusTraversable="false" maxWidth="Infinity" prefHeight="35.0" promptText="₱0.00" style="-fx-background-color: #FFE270; -fx-text-fill: #83827b; -fx-border-color: #ffe680; -fx-border-width: 1px; -fx-background-radius: 4px; -fx-border-radius: 4px;" styleClass="price-field">
+                                       <font>
+                                          <Font name="Inter Medium" size="13.0" />
+                                       </font>
+                                    </TextField>
+                                 </children>
+                              </VBox>
+                              <!-- Empty column for remaining 50% space -->
+                           </children>
+                        </GridPane>
+                     </children>
+                  </VBox>
+               </VBox>
+               
+               <!-- Total and Create Order -->
+               <HBox alignment="CENTER" spacing="10.0">
+                  <children>
+                     <Label fx:id="totalLabel" text="Total Items: 0" textFill="#92400d">
+                        <font>
+                           <Font name="Inter Bold" size="18.0" />
+                        </font>
+                     </Label>
+                     <Region HBox.hgrow="ALWAYS" />
+                     <Button fx:id="createOrderButton" styleClass="action-button" text="Create Order" textFill="WHITE">
+                        <font>
+                           <Font name="Inter Extra Bold" size="15.0" />
+                        </font>
+                        <HBox.margin>
+                           <Insets left="10.0" />
+                        </HBox.margin>
+                     </Button>
+                  </children>
+                  <VBox.margin>
+                     <Insets top="10.0" />
+                  </VBox.margin>
+               </HBox>
+            </children>
+         </VBox>
+         
+         <!-- Invoice Preview (50% width) -->
+         <VBox fx:id="receiptPreviewContainer" spacing="15.0" style="-fx-background-color: #fffefb; -fx-border-color: #fde998; -fx-background-radius: 6; -fx-border-radius: 6;" GridPane.columnIndex="1" VBox.vgrow="ALWAYS">
+            <padding>
+               <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            </padding>
+            <children>
+               <Label text="Receipt Preview" textFill="#92400d">
+                  <font>
+                     <Font name="Inter Extra Bold" size="20.0" />
+                  </font>
+               </Label>
+               
+               <!-- Stable placeholder label - shows when no items -->
+               <Label fx:id="previewPlaceholderLabel" alignment="CENTER" maxWidth="Infinity" text="Add Items to see receipt preview" textAlignment="CENTER" textFill="#c24c00" visible="true">
+                  <font>
+                     <Font name="Inter Regular" size="13.0" />
+                  </font>
+                  <VBox.margin>
+                     <Insets bottom="10.0" top="5.0" />
+                  </VBox.margin>
+               </Label>
+               
+               <ScrollPane fx:id="invoiceScrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: white; -fx-border-color: #E5E7EB; -fx-border-radius: 4; -fx-padding: 0;" styleClass="no-scrollbar-space" vbarPolicy="NEVER" VBox.vgrow="ALWAYS">
+                  <content>
+                     <VBox fx:id="invoicePreviewContent" alignment="CENTER" style="-fx-background-color: white;" />
+                  </content>
+               </ScrollPane>
+               
+               <!-- Invoice Preview Control Buttons -->
+               <HBox fx:id="invoiceControlButtons" alignment="CENTER" spacing="10.0">
+                  <children>
+                     <Button fx:id="zoomInButton" style="-fx-background-color: #F2FEFE; -fx-border-color: #CAFEF8; -fx-border-width: 1px; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-min-width: 32px; -fx-min-height: 32px; -fx-max-width: 32px; -fx-max-height: 32px; -fx-pref-width: 32px; -fx-pref-height: 32px;">
+                        <graphic>
+                           <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../icons/zoom_in_icon.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                     <Button fx:id="zoomOutButton" style="-fx-background-color: #F2FEFE; -fx-border-color: #CAFEF8; -fx-border-width: 1px; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-min-width: 32px; -fx-min-height: 32px; -fx-max-width: 32px; -fx-max-height: 32px; -fx-pref-width: 32px; -fx-pref-height: 32px;">
+                        <graphic>
+                           <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../icons/zoom_out_icon.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                     <Button fx:id="pageViewButton" style="-fx-background-color: #F2FEFE; -fx-border-color: #CAFEF8; -fx-border-width: 1px; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-min-width: 32px; -fx-min-height: 32px; -fx-max-width: 32px; -fx-max-height: 32px; -fx-pref-width: 32px; -fx-pref-height: 32px;">
+                        <graphic>
+                           <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../icons/page_size_icon.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                     <Button fx:id="viewFullImageButton" style="-fx-background-color: #F2FEFE; -fx-border-color: #CAFEF8; -fx-border-width: 1px; -fx-background-radius: 6px; -fx-border-radius: 6px; -fx-min-width: 32px; -fx-min-height: 32px; -fx-max-width: 32px; -fx-max-height: 32px; -fx-pref-width: 32px; -fx-pref-height: 32px;">
+                        <graphic>
+                           <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <image>
+                                 <Image url="@../icons/fullscreen_icon.png" />
+                              </image>
+                           </ImageView>
+                        </graphic>
+                     </Button>
+                  </children>
+                  <VBox.margin>
+                     <Insets top="10.0" />
+                  </VBox.margin>
+               </HBox>
+            </children>
+         </VBox>
+      </GridPane>
+      
+      <!-- All Orders Table Section -->
+      <VBox spacing="15.0" style="-fx-background-color: #fffefb; -fx-border-color: #fde998; -fx-background-radius: 6; -fx-border-radius: 6;">
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+         <children>
+            <HBox alignment="CENTER_LEFT" spacing="15.0">
+               <children>
+                  <Label text="All Orders" textFill="#92400d">
+                     <font>
+                        <Font name="Inter Semi Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_RIGHT" spacing="15.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <ComboBox fx:id="orderStatusFilter" prefWidth="120.0" promptText="Order Status" styleClass="filter-control" />
+                        <TextField fx:id="searchField" prefWidth="150.0" promptText="Search orders..." styleClass="filter-control" />
+                        <ComboBox fx:id="sortFilterCombo" prefWidth="120.0" promptText="Sort by" styleClass="filter-control" />
+                        <Button fx:id="clearFiltersButton" style="-fx-background-color: #d97708;" text="Clear Filters" textFill="WHITE" />
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+            <TableView fx:id="ordersTable" maxHeight="320.0" maxWidth="Infinity" minHeight="280.0" prefHeight="300.0" styleClass="recent-orders-table" stylesheets="@../css/new-table-style.css" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="orderIdColumn" minWidth="120.0" prefWidth="140.0" text="Order ID" />
+                  <TableColumn fx:id="nameColumn" minWidth="60.0" prefWidth="80.0" text="Name" />
+                  <TableColumn fx:id="contactNumberColumn" minWidth="100.0" prefWidth="120.0" text="Contact Number" />
+                  <TableColumn fx:id="totalAmountColumn" minWidth="80.0" prefWidth="100.0" text="Total Amount" />
+                  <TableColumn fx:id="dateTimeColumn" minWidth="120.0" prefWidth="140.0" text="Date &amp; Time" />
+                  <TableColumn fx:id="orderStatusColumn" minWidth="120.0" prefWidth="120.0" styleClass="status-column" text="Order Status" />
+                  <TableColumn fx:id="actionsColumn" minWidth="120.0" prefWidth="200.0" styleClass="actions-column" text="Actions" />
+               </columns>
+            </TableView>
+            <HBox alignment="CENTER" spacing="15.0">
+               <children>
+                  <Button fx:id="prevPageBtn" mnemonicParsing="false" onAction="#handlePrevPage" style="-fx-background-color: #fef7da; -fx-border-color: #fdf1bb;" text="Previous">
+                     <font>
+                        <Font name="Inter Regular" size="13.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="pageLabel" text="Page 1 of 1" textFill="#b4540a">
+                     <font>
+                        <Font name="Inter Regular" size="13.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="nextPageBtn" mnemonicParsing="false" onAction="#handleNextPage" style="-fx-background-color: #fef7da; -fx-border-color: #fdf1bb;" text="Next">
+                     <font>
+                        <Font name="Inter Regular" size="13.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="resultsInfoLabel" text="Showing results" textFill="#b4540a" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Inter Regular" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </VBox>
+</ScrollPane>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="80.0" spacing="0.0" style="-fx-background-color: FFF9ED; -fx-border-color: FDE68A; -fx-border-width: 0 0 1 0;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wondertrackxd.controller.header.HeaderController">
+   <children>
+      <!-- Logo Section -->
+      <HBox fx:id="logoSection" prefHeight="80.0" prefWidth="215.0" style="-fx-border-color: FDE68A; -fx-border-width: 0 1 0 0; -fx-background-color: FFF9ED;">
+         <children>
+            <StackPane alignment="CENTER_RIGHT" prefHeight="79.0" prefWidth="67.0">
+               <children>
+                  <ImageView fitHeight="51.0" fitWidth="61.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/wonderpoffles_logo.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets right="1.0" />
+                     </StackPane.margin>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <VBox alignment="CENTER" prefHeight="79.0" prefWidth="148.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="23.0" prefWidth="184.0" text="WonderTrack" textFill="#92400d">
+                     <font>
+                        <Font name="Inter Extra Bold" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="110.0" style="-fx-line-spacing: -4;" text="Order &amp; Sales Tracking System" textAlignment="CENTER" textFill="#d97708" wrapText="true">
+                     <font>
+                        <Font name="Inter Regular" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+
+      <!-- Navigation Section -->
+      <HBox fx:id="navSection" alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: FFF9ED;" HBox.hgrow="ALWAYS">
+         <children>
+            <Button fx:id="sidebarToggleButton" mnemonicParsing="false" onAction="#handleSidebarToggle" prefWidth="29.0" style="-fx-border-color: transparent; -fx-background-color: transparent;" styleClass="sidebar-toggle-button">
+               <graphic>
+                  <ImageView fx:id="burgerIcon" fitHeight="18.0" fitWidth="17.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view">
+                     <image>
+                        <Image url="@../icons/sidebar_icon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </Button>
+            <Label fx:id="pageTitle" text="Overview" textFill="#92400d">
+               <font>
+                  <Font name="Inter Extra Bold" size="25.0" />
+               </font>
+            </Label>
+            <Region HBox.hgrow="ALWAYS" />
+            <Button fx:id="manageProductsButton" styleClass="action-button" text="Manage Products" textFill="WHITE" visible="false" style="-fx-background-color: #d97708; -fx-background-radius: 4;">
+               <font>
+                  <Font name="Inter Medium" size="14.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </Button>
+            <ComboBox fx:id="analyticsTimeFilter" prefWidth="180.0" promptText="Last 30 Days" style="-fx-background-color: #ffffff; -fx-border-color: #fde998; -fx-border-radius: 6px; -fx-background-radius: 6px;" visible="false">
+               <HBox.margin>
+                  <Insets right="20.0" />
+               </HBox.margin>
+            </ComboBox>
+         </children>
+      </HBox>
+   </children>
+</HBox>

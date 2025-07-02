@@ -1,0 +1,481 @@
+/* ===== SCROLL BAR ELIMINATION CSS ===== */
+/* Complete and systematic approach to hide ALL scroll bars while preserving functionality */
+
+/* 1. GLOBAL SCROLL BAR HIDING */
+.scroll-bar {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+}
+
+.scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+    -fx-min-width: 0;
+}
+
+.scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
+    -fx-min-height: 0;
+}
+
+/* Hide all scroll bar components */
+.scroll-bar .increment-button,
+.scroll-bar .decrement-button,
+.scroll-bar .increment-arrow,
+.scroll-bar .decrement-arrow,
+.scroll-bar .track,
+.scroll-bar .track-background,
+.scroll-bar .thumb {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+}
+
+/* Hide corner regions */
+.corner {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* 2. GLOBAL FOCUS ELIMINATION */
+* {
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+*:focused {
+    -fx-effect: null !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+}
+
+/* 3. SPECIFIC CONTROL TARGETING */
+.scroll-pane {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.scroll-pane:focused {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+}
+
+.vbox, .hbox, .pane, .region {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.vbox:focused, .hbox:focused, .pane:focused, .region:focused {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+}
+
+/* 4. CHART AND CONTENT TARGETING */
+.chart {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.chart:focused {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+}
+
+/* 5. ULTIMATE COMPREHENSIVE OVERRIDES */
+/* Target every possible JavaFX node type that might show scroll bars */
+.scroll-pane .scroll-bar,
+.list-view .scroll-bar, 
+.table-view .scroll-bar,
+.text-area .scroll-bar,
+.tree-view .scroll-bar,
+.virtual-flow .scroll-bar {
+    -fx-opacity: 0 !important;
+    -fx-pref-width: 0 !important;
+    -fx-pref-height: 0 !important;
+    -fx-max-width: 0 !important;
+    -fx-max-height: 0 !important;
+    -fx-min-width: 0 !important;
+    -fx-min-height: 0 !important;
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+}
+
+/* Force hide ALL focus traversal effects */
+.focus-indicator {
+    -fx-opacity: 0 !important;
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+}
+
+/* Nuclear option - target absolutely everything */
+.root .scroll-bar {
+    -fx-opacity: 0 !important;
+    -fx-background-color: transparent !important;
+}
+
+.root * {
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+.root *:focused {
+    -fx-effect: null !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+}
+
+/* ===== WHITE LINE/GAP ELIMINATION ===== */
+/* Target ScrollPane internal components that can cause white lines */
+
+/* ScrollPane viewport - often source of white background */
+.scroll-pane .viewport {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+    -fx-padding: 0 !important;
+}
+
+/* ScrollPane content area */
+.scroll-pane .content {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+    -fx-padding: 0 !important;
+}
+
+/* Custom scroll pane specific fixes */
+.custom-scroll-pane {
+    -fx-background-color: #FFFAEC !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+    -fx-padding: 0 !important;
+    -fx-fit-to-width: true !important;
+}
+
+.custom-scroll-pane .viewport {
+    -fx-background-color: #FFFAEC !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+    -fx-padding: 0 !important;
+}
+
+.custom-scroll-pane .content {
+    -fx-background-color: #FFFAEC !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+    -fx-padding: 0 !important;
+}
+
+/* Force content to use full available width */
+
+/* ===== INVISIBLE SCROLLBARS CLASS ===== */
+/* Special class for receipt preview - functional but invisible scrollbars */
+.invisible-scrollbars .scroll-bar {
+    -fx-opacity: 0 !important;
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-pref-width: 0 !important;
+    -fx-pref-height: 0 !important;
+    -fx-max-width: 0 !important;
+    -fx-max-height: 0 !important;
+    -fx-min-width: 0 !important;
+    -fx-min-height: 0 !important;
+}
+
+.invisible-scrollbars .scroll-bar:vertical {
+    -fx-opacity: 0 !important;
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-pref-width: 0 !important;
+    -fx-max-width: 0 !important;
+    -fx-min-width: 0 !important;
+}
+
+.invisible-scrollbars .scroll-bar:horizontal {
+    -fx-opacity: 0 !important;
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-pref-height: 0 !important;
+    -fx-max-height: 0 !important;
+    -fx-min-height: 0 !important;
+}
+
+.invisible-scrollbars .scroll-bar .increment-button,
+.invisible-scrollbars .scroll-bar .decrement-button,
+.invisible-scrollbars .scroll-bar .increment-arrow,
+.invisible-scrollbars .scroll-bar .decrement-arrow,
+.invisible-scrollbars .scroll-bar .track,
+.invisible-scrollbars .scroll-bar .track-background,
+.invisible-scrollbars .scroll-bar .thumb {
+    -fx-opacity: 0 !important;
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-pref-width: 0 !important;
+    -fx-pref-height: 0 !important;
+    -fx-max-width: 0 !important;
+    -fx-max-height: 0 !important;
+    -fx-min-width: 0 !important;
+    -fx-min-height: 0 !important;
+}
+
+.invisible-scrollbars .corner {
+    -fx-opacity: 0 !important;
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+}
+
+/* ===== NO SCROLLBAR SPACE CLASS ===== */
+/* Completely eliminate all scrollbar space allocation */
+.no-scrollbar-space {
+    -fx-fit-to-width: true !important;
+    -fx-fit-to-height: false !important;
+}
+
+.no-scrollbar-space .scroll-bar {
+    -fx-opacity: 0 !important;
+    -fx-pref-width: 0 !important;
+    -fx-pref-height: 0 !important;
+    -fx-max-width: 0 !important;
+    -fx-max-height: 0 !important;
+    -fx-min-width: 0 !important;
+    -fx-min-height: 0 !important;
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+}
+
+.no-scrollbar-space .scroll-bar:vertical,
+.no-scrollbar-space .scroll-bar:horizontal {
+    -fx-opacity: 0 !important;
+    -fx-pref-width: 0 !important;
+    -fx-pref-height: 0 !important;
+    -fx-max-width: 0 !important;
+    -fx-max-height: 0 !important;
+    -fx-min-width: 0 !important;
+    -fx-min-height: 0 !important;
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+}
+
+.no-scrollbar-space .scroll-bar .increment-button,
+.no-scrollbar-space .scroll-bar .decrement-button,
+.no-scrollbar-space .scroll-bar .increment-arrow,
+.no-scrollbar-space .scroll-bar .decrement-arrow,
+.no-scrollbar-space .scroll-bar .track,
+.no-scrollbar-space .scroll-bar .track-background,
+.no-scrollbar-space .scroll-bar .thumb {
+    -fx-opacity: 0 !important;
+    -fx-pref-width: 0 !important;
+    -fx-pref-height: 0 !important;
+    -fx-max-width: 0 !important;
+    -fx-max-height: 0 !important;
+    -fx-min-width: 0 !important;
+    -fx-min-height: 0 !important;
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+}
+
+.no-scrollbar-space .corner {
+    -fx-opacity: 0 !important;
+    -fx-pref-width: 0 !important;
+    -fx-pref-height: 0 !important;
+    -fx-max-width: 0 !important;
+    -fx-max-height: 0 !important;
+    -fx-min-width: 0 !important;
+    -fx-min-height: 0 !important;
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+}
+
+.no-scrollbar-space .viewport {
+    -fx-background-color: white !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+    -fx-padding: 0 !important;
+}
+
+.no-scrollbar-space .content {
+    -fx-background-color: white !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+    -fx-padding: 0 !important;
+}
+.custom-vbox {
+    -fx-background-color: #FFFAEC !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+    -fx-pref-width: -1 !important;
+    -fx-max-width: Infinity !important;
+}
+
+/* Remove any grid lines or internal borders */
+.scroll-pane .grid-lines {
+    -fx-opacity: 0 !important;
+}
+
+/* Target any remaining white areas */
+.scroll-pane .header,
+.scroll-pane .column-header,
+.scroll-pane .row-header {
+    -fx-background-color: #FFFAEC !important;
+    -fx-border-color: transparent !important;
+}
+
+/* Ensure seamless background continuity */
+.scroll-pane,
+.scroll-pane .viewport,
+.scroll-pane .content,
+.custom-scroll-pane,
+.custom-scroll-pane .viewport,
+.custom-scroll-pane .content {
+    -fx-background-color: #FFFAEC !important;
+    -fx-border-color: transparent !important;
+    -fx-background-radius: 0 !important;
+    -fx-border-radius: 0 !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+}
+
+/* CRITICAL: Eliminate scrollbar space reservation completely */
+.custom-scroll-pane .scroll-bar,
+.custom-scroll-pane .scroll-bar:vertical,
+.custom-scroll-pane .scroll-bar:horizontal {
+    -fx-opacity: 0 !important;
+    -fx-pref-width: 0 !important;
+    -fx-pref-height: 0 !important;
+    -fx-max-width: 0 !important;
+    -fx-max-height: 0 !important;
+    -fx-min-width: 0 !important;
+    -fx-min-height: 0 !important;
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-padding: 0 !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+}
+
+/* Enable scrolling while hiding scroll bars completely */
+.custom-scroll-pane {
+    -fx-hbar-policy: never !important;
+    -fx-vbar-policy: never !important; /* CRITICAL: Never reserve space for scrollbars */
+    -fx-fit-to-width: true !important;
+    -fx-fit-to-height: false !important; /* CRITICAL: Allow content to exceed viewport height */
+}
+
+/* Ensure content fills entire available space */
+.custom-scroll-pane .content,
+.custom-vbox {
+    -fx-pref-width: -1 !important;
+    -fx-max-width: Infinity !important;
+    -fx-min-width: 0 !important;
+}
+
+/* CRITICAL: Force ScrollPane to not reserve any space for scrollbars */
+.custom-scroll-pane {
+    -fx-padding: 0 !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+}
+
+/* Force the ScrollPane viewport to use full width */
+.custom-scroll-pane .viewport {
+    -fx-padding: 0 !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+}
+
+/* Ensure no extra margins or spacing */
+.custom-scroll-pane .content {
+    -fx-padding: 0 !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+} 
+
+/* Sidebar stability fixes */
+.sidebar-container {
+    -fx-min-width: 215px;
+    -fx-max-width: 215px;
+    -fx-pref-width: 215px;
+    /* CRITICAL: Preserve sidebar border - override all general border removals */
+    -fx-background-color: #FFF9ED !important;
+    -fx-border-color: #FDE68A !important;
+    -fx-border-width: 0 1px 0 0 !important;
+    -fx-border-style: solid !important;
+}
+
+/* ULTRA-SPECIFIC SIDEBAR BORDER PRESERVATION */
+/* Use maximum CSS specificity to ensure sidebar border is never removed */
+.root .sidebar-container,
+BorderPane .sidebar-container,
+.sidebar-container.sidebar-container,
+VBox.sidebar-container {
+    -fx-background-color: #FFF9ED !important;
+    -fx-border-color: #FDE68A !important;
+    -fx-border-width: 0 1px 0 0 !important;
+    -fx-border-style: solid !important;
+}
+
+/* Ensure sidebar border overrides any focus or interaction states */
+.sidebar-container:focused,
+.sidebar-container:hover,
+.sidebar-container:pressed {
+    -fx-background-color: #FFF9ED !important;
+    -fx-border-color: #FDE68A !important;
+    -fx-border-width: 0 1px 0 0 !important;
+    -fx-border-style: solid !important;
+}
+
+.sidebar-container .toggle-button {
+    -fx-min-width: 195px;
+    -fx-max-width: 195px;
+    -fx-pref-width: 195px;
+    -fx-min-height: 31px;
+    -fx-max-height: 31px;
+    -fx-pref-height: 31px;
+}
+
+.sidebar-container .button {
+    -fx-min-width: 185px;
+    -fx-max-width: 185px;
+    -fx-pref-width: 185px;
+}
+
+/* Prevent button content from affecting sizing */
+.sidebar-container .toggle-button .text,
+.sidebar-container .button .text {
+    -fx-text-overrun: clip;
+    -fx-wrap-text: false;
+} 

@@ -1,0 +1,747 @@
+/* Form Controls Fix - Remove all focus/hover/selection effects for Create New Order container only */
+
+/* Complete JavaFX Form Controls Override - Maximum Specificity */
+
+/* Text Fields - All possible states covered */
+.text-field:not(.filter-control),
+.text-field:not(.filter-control):focused,
+.text-field:not(.filter-control):hover,
+.text-field:not(.filter-control):pressed,
+.text-field:not(.filter-control):selected,
+.text-field:not(.filter-control):showing {
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+    -fx-pref-height: 35px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-highlight-fill: transparent !important;
+    -fx-highlight-text-fill: black !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+}
+
+/* Filter Controls - DatePicker, ComboBox, TextField for filters */
+.filter-control {
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+.filter-control:focused,
+.filter-control:hover,
+.filter-control:pressed,
+.filter-control:selected,
+.filter-control:showing {
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+/* Filter Control ComboBox specific components */
+.filter-control .combo-box-base,
+.filter-control:showing .combo-box-base,
+.filter-control:focused .combo-box-base,
+.filter-control:pressed .combo-box-base {
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+}
+
+/* Filter Control ComboBox list cell styling */
+.filter-control .list-cell,
+.filter-control:showing .list-cell,
+.filter-control:focused .list-cell,
+.filter-control:selected .list-cell {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-text-fill: #374151 !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-font-size: 13px !important;
+    -fx-font-family: "Inter Regular" !important;
+    -fx-font-weight: normal !important;
+}
+
+/* Filter Control ComboBox text field */
+.filter-control .text-field,
+.filter-control:showing .text-field,
+.filter-control:focused .text-field,
+.filter-control:armed .text-field {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+/* Filter Control ComboBox arrow button */
+.filter-control .arrow-button,
+.filter-control:showing .arrow-button,
+.filter-control:focused .arrow-button,
+.filter-control:armed .arrow-button,
+.filter-control .arrow-button:hover,
+.filter-control .arrow-button:pressed {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background-radius: 0 4px 4px 0 !important;
+}
+
+/* Filter control arrow uses default styling */
+
+/* Filter Control ComboBox Dropdown List */
+.filter-control.combo-box-popup .list-view {
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 2) !important;
+}
+
+.filter-control.combo-box-popup .list-view .list-cell {
+    -fx-background-color: white !important;
+    -fx-text-fill: #374151 !important;
+    -fx-padding: 8px 12px !important;
+    -fx-border-color: transparent !important;
+    -fx-font-size: 13px !important;
+    -fx-font-family: "Inter Regular" !important;
+    -fx-font-weight: normal !important;
+}
+
+.filter-control.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #fff7ed !important;
+    -fx-text-fill: #374151 !important;
+}
+
+.filter-control.combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: #fef3c7 !important;
+    -fx-text-fill: #92400e !important;
+}
+
+/* ComboBox - All possible states covered */
+.combo-box:not(.filter-control),
+.combo-box:not(.filter-control):focused,
+.combo-box:not(.filter-control):hover,
+.combo-box:not(.filter-control):pressed,
+.combo-box:not(.filter-control):selected,
+.combo-box:not(.filter-control):showing,
+.combo-box:not(.filter-control):armed {
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+    -fx-pref-height: 35px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-highlight-fill: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+    -fx-region-background: white !important;
+    -fx-region-border: #ffe680 !important;
+}
+
+/* ComboBox Base Container Override */
+.combo-box:not(.filter-control) .combo-box-base,
+.combo-box:not(.filter-control):showing .combo-box-base,
+.combo-box:not(.filter-control):focused .combo-box-base,
+.combo-box:not(.filter-control):pressed .combo-box-base {
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+}
+
+/* Additional ComboBox Internal Components */
+.combo-box:not(.filter-control) > .list-cell,
+.combo-box:not(.filter-control):showing > .list-cell,
+.combo-box:not(.filter-control):focused > .list-cell {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background-radius: 4px !important;
+}
+
+/* ComboBox List Cell Override - Main display text field */
+.combo-box:not(.filter-control) .list-cell,
+.combo-box:not(.filter-control):showing .list-cell,
+.combo-box:not(.filter-control):focused .list-cell,
+.combo-box:not(.filter-control):selected .list-cell {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-text-fill: #374151 !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-font-size: 13px !important;
+    -fx-font-family: "Inter Regular" !important;
+    -fx-font-weight: normal !important;
+}
+
+/* Pending Status Text Style - Comprehensive Coverage */
+.combo-box .list-cell:contains("Pending"),
+.combo-box:showing .list-cell:contains("Pending"),
+.combo-box:focused .list-cell:contains("Pending"),
+.combo-box:hover .list-cell:contains("Pending"),
+.combo-box-popup .list-cell:contains("Pending"),
+.combo-box-base .list-cell:contains("Pending"),
+.combo-box-base:showing .list-cell:contains("Pending"),
+.combo-box-base:focused .list-cell:contains("Pending"),
+.combo-box-base:hover .list-cell:contains("Pending") {
+    -fx-text-fill: #6B7280 !important;
+}
+
+/* Ensure text color persists in dropdown */
+.combo-box-popup .list-cell:contains("Pending") {
+    -fx-text-fill: #6B7280 !important;
+}
+
+/* Override for any nested text nodes */
+.list-cell:contains("Pending") .text,
+.combo-box .list-cell:contains("Pending") .text,
+.combo-box-popup .list-cell:contains("Pending") .text {
+    -fx-fill: #6B7280 !important;
+}
+
+/* Direct style override for Pending text */
+.text:contains("Pending") {
+    -fx-fill: #6B7280 !important;
+}
+
+/* ComboBox button and arrow components */
+.combo-box:not(.filter-control) .arrow-button,
+.combo-box:not(.filter-control):showing .arrow-button,
+.combo-box:not(.filter-control):focused .arrow-button,
+.combo-box:not(.filter-control):armed .arrow-button {
+    -fx-background-color: transparent !important;
+    -fx-background-radius: 0 4px 4px 0 !important;
+}
+
+/* ComboBox arrows use default styling */
+
+/* ComboBox Arrow Button */
+.combo-box:not(.filter-control) .arrow-button,
+.combo-box:not(.filter-control) .arrow-button:hover,
+.combo-box:not(.filter-control) .arrow-button:pressed,
+.combo-box:not(.filter-control):showing .arrow-button,
+.combo-box:not(.filter-control):focused .arrow-button {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background-radius: 0 4px 4px 0 !important;
+}
+
+/* ComboBox arrow uses default styling */
+
+/* ComboBox Dropdown List */
+.combo-box-popup .list-view {
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 8, 0, 0, 2) !important;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: white !important;
+    -fx-text-fill: #374151 !important;
+    -fx-padding: 8px 12px !important;
+    -fx-border-color: transparent !important;
+    -fx-font-size: 13px !important;
+    -fx-font-family: "Inter Regular" !important;
+    -fx-font-weight: normal !important;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #fff7ed !important;
+    -fx-text-fill: #374151 !important;
+}
+
+.combo-box-popup .list-view .list-cell:selected {
+    -fx-background-color: #fef3c7 !important;
+    -fx-text-fill: #92400e !important;
+}
+
+/* Spinner - All states */
+.spinner,
+.spinner:focused,
+.spinner:hover,
+.spinner:pressed {
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+    -fx-pref-height: 35px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+.spinner .text-field {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+.spinner .increment-arrow-button,
+.spinner .decrement-arrow-button {
+    -fx-background-color: #d97708 !important;
+    -fx-border-color: transparent !important;
+    -fx-border-radius: 0 !important;
+    -fx-background-radius: 4 !important;
+}
+
+.spinner .increment-arrow-button:hover,
+.spinner .decrement-arrow-button:hover {
+    -fx-background-color: #d97708 !important;
+}
+
+.spinner .increment-arrow-button .increment-arrow,
+.spinner .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: #ffffff !important;
+}
+
+/* Buttons - Remove all effects */
+.button,
+.button:focused,
+.button:hover,
+.button:pressed,
+.button:armed {
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+}
+
+/* Additional overrides for stubborn JavaFX internal classes */
+.text-input,
+.text-input:focused {
+    -fx-highlight-fill: transparent !important;
+    -fx-highlight-text-fill: black !important;
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+}
+
+/* Force override any remaining default styling */
+* {
+    -fx-focus-traversable: true;
+}
+
+/* Specific override for main form controls */
+#customerNameField,
+#paymentMethodCombo,
+#categoryCombo,
+#flavorCombo,
+#quantitySpinner {
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+/* Prevent ComboBox width changes */
+#paymentMethodCombo,
+#categoryCombo,
+#flavorCombo {
+    -fx-max-width: infinity !important;
+    -fx-min-width: 100px !important;
+    -fx-pref-width: region-use-computed-size !important;
+}
+
+#customerNameField:focused,
+#paymentMethodCombo:focused,
+#categoryCombo:focused,
+#flavorCombo:focused,
+#quantitySpinner:focused {
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+/* Additional ComboBox specific overrides for showing state */
+#paymentMethodCombo:showing,
+#categoryCombo:showing,
+#flavorCombo:showing,
+#paymentMethodCombo:pressed,
+#categoryCombo:pressed,
+#flavorCombo:pressed {
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+    -fx-effect: none !important;
+}
+
+/* Override ComboBox internal styling more aggressively */
+#paymentMethodCombo .combo-box-base,
+#categoryCombo .combo-box-base,
+#flavorCombo .combo-box-base {
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+}
+
+#paymentMethodCombo:showing .combo-box-base,
+#categoryCombo:showing .combo-box-base,
+#flavorCombo:showing .combo-box-base,
+#paymentMethodCombo:focused .combo-box-base,
+#categoryCombo:focused .combo-box-base,
+#flavorCombo:focused .combo-box-base {
+    -fx-background-color: white !important;
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-border-radius: 4px !important;
+    -fx-background-radius: 4px !important;
+} 
+
+/* Force radius on all ComboBox child components and states */
+#paymentMethodCombo > *,
+#categoryCombo > *,
+#flavorCombo > * {
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+}
+
+#paymentMethodCombo:showing > *,
+#categoryCombo:showing > *,
+#flavorCombo:showing > *,
+#paymentMethodCombo:focused > *,
+#categoryCombo:focused > *,
+#flavorCombo:focused > *,
+#paymentMethodCombo:armed > *,
+#categoryCombo:armed > *,
+#flavorCombo:armed > *,
+#paymentMethodCombo:pressed > *,
+#categoryCombo:pressed > *,
+#flavorCombo:pressed > * {
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+}
+
+/* Price Field Styling */
+#priceField,
+#priceField:focused,
+#priceField:hover,
+#priceField:pressed,
+#priceField:armed,
+#priceField:disabled {
+    -fx-background-color: #fef7da !important;
+    -fx-text-fill: black !important;
+    -fx-border-color: #fdf1bb !important;
+    -fx-border-width: 1px !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-prompt-text-fill: rgba(255, 255, 255, 0.7) !important;
+}
+
+/* Ensure price field text is always white */
+#priceField .text {
+    -fx-fill: black !important;
+}
+
+/* Common Button Styles */
+.action-button {
+    -fx-background-color: #d97708 !important;
+    -fx-text-fill: white !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+}
+
+/* Add Item and Create Order Button Base Styling */
+#addItemButton,
+#createOrderButton {
+    -fx-base: #d97708 !important;
+    -fx-background: #d97708 !important;
+    -fx-background-color: #d97708 !important;
+    -fx-control-inner-background: #d97708 !important;
+    -fx-text-fill: white !important;
+    -fx-text-base-color: white !important;
+}
+
+/* Button States */
+#addItemButton:hover, #addItemButton:focused, #addItemButton:pressed, #addItemButton:armed, #addItemButton:selected, #addItemButton:default,
+#createOrderButton:hover, #createOrderButton:focused, #createOrderButton:pressed, #createOrderButton:armed, #createOrderButton:selected, #createOrderButton:default {
+    -fx-background-color: #d97708 !important;
+}
+
+/* Button Text */
+#addItemButton > *, #addItemButton .text,
+#createOrderButton > *, #createOrderButton .text {
+    -fx-background-color: transparent !important;
+    -fx-text-fill: white !important;
+}
+
+/* Container-specific button overrides */
+.scroll-pane .vbox .hbox #addItemButton,
+.scroll-pane .vbox .vbox #createOrderButton,
+ScrollPane VBox HBox #addItemButton,
+ScrollPane VBox VBox #createOrderButton {
+    -fx-background-color: #d97708 !important;
+    -fx-text-fill: white !important;
+}
+
+/* CRITICAL: Override global *:focused rule from new-table-style.css */
+/* These rules MUST be more specific than the global * selector */
+
+ScrollPane #addItemButton,
+ScrollPane #addItemButton:focused,
+ScrollPane #addItemButton:hover,
+ScrollPane #addItemButton:pressed,
+ScrollPane #addItemButton:armed,
+VBox #addItemButton,
+VBox #addItemButton:focused,
+VBox #addItemButton:hover,
+VBox #addItemButton:pressed,
+VBox #addItemButton:armed,
+HBox #addItemButton,
+HBox #addItemButton:focused,
+HBox #addItemButton:hover,
+HBox #addItemButton:pressed,
+HBox #addItemButton:armed {
+    -fx-background-color: #d97708 !important;
+    -fx-text-fill: white !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+}
+
+ScrollPane #createOrderButton,
+ScrollPane #createOrderButton:focused,
+ScrollPane #createOrderButton:hover,
+ScrollPane #createOrderButton:pressed,
+ScrollPane #createOrderButton:armed,
+VBox #createOrderButton,
+VBox #createOrderButton:focused,
+VBox #createOrderButton:hover,
+VBox #createOrderButton:pressed,
+VBox #createOrderButton:armed,
+HBox #createOrderButton,
+HBox #createOrderButton:focused,
+HBox #createOrderButton:hover,
+HBox #createOrderButton:pressed,
+HBox #createOrderButton:armed {
+    -fx-background-color: #d97708 !important;
+    -fx-text-fill: white !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+}
+
+ScrollPane #createOrderButton:armed {
+    -fx-background-color: #d97708 !important;
+    -fx-text-fill: white !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+}
+
+/* ULTRA-SPECIFIC RULES - HIGHEST PRIORITY */
+/* Using RGB values for exact color specification */
+
+.scroll-pane .vbox .hbox #addItemButton,
+.scroll-pane .vbox .hbox #addItemButton:hover,
+.scroll-pane .vbox .hbox #addItemButton:focused,
+.scroll-pane .vbox .hbox #addItemButton:pressed,
+.scroll-pane .vbox .hbox #addItemButton:armed,
+.scroll-pane .vbox .hbox #addItemButton:selected,
+.scroll-pane .vbox .hbox #addItemButton:default,
+ScrollPane VBox HBox Button#addItemButton,
+ScrollPane VBox HBox Button#addItemButton:hover,
+ScrollPane VBox HBox Button#addItemButton:focused,
+ScrollPane VBox HBox Button#addItemButton:pressed,
+ScrollPane VBox HBox Button#addItemButton:armed {
+    -fx-background-color: #d97708 !important;
+    -fx-text-fill: rgb(255, 255, 255) !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+}
+
+.scroll-pane .vbox .vbox #createOrderButton,
+.scroll-pane .vbox .vbox #createOrderButton:hover,
+.scroll-pane .vbox .vbox #createOrderButton:focused,
+.scroll-pane .vbox .vbox #createOrderButton:pressed,
+.scroll-pane .vbox .vbox #createOrderButton:armed,
+.scroll-pane .vbox .vbox #createOrderButton:selected,
+.scroll-pane .vbox .vbox #createOrderButton:default,
+ScrollPane VBox VBox Button#createOrderButton,
+ScrollPane VBox VBox Button#createOrderButton:hover,
+ScrollPane VBox VBox Button#createOrderButton:focused,
+ScrollPane VBox VBox Button#createOrderButton:pressed,
+ScrollPane VBox VBox Button#createOrderButton:armed {
+    -fx-background-color: #d97708 !important;
+    -fx-text-fill: rgb(255, 255, 255) !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+}
+
+.scroll-pane .vbox .vbox #createOrderButton:armed {
+    -fx-background-color: #d97708 !important;
+    -fx-text-fill: rgb(255, 255, 255) !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-border-color: transparent !important;
+    -fx-border-width: 0px !important;
+    -fx-effect: none !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+    -fx-background-insets: 0 !important;
+    -fx-border-insets: 0 !important;
+}
+
+/* FINAL NUCLEAR OPTION - Override every possible state */
+#addItemButton,
+#addItemButton:hover,
+#addItemButton:focused,
+#addItemButton:pressed,
+#addItemButton:armed,
+#addItemButton:selected,
+#addItemButton:default,
+#addItemButton:showing,
+#addItemButton:disabled {
+    -fx-base: #d97708 !important;
+    -fx-background: #d97708 !important;
+    -fx-background-color: #d97708 !important;
+    -fx-control-inner-background: #d97708 !important;
+    -fx-text-fill: rgb(255, 255, 255) !important;
+    -fx-text-base-color: rgb(255, 255, 255) !important;
+}
+
+#createOrderButton,
+#createOrderButton:hover,
+#createOrderButton:focused,
+#createOrderButton:pressed,
+#createOrderButton:armed,
+#createOrderButton:selected,
+#createOrderButton:default,
+#createOrderButton:showing,
+#createOrderButton:disabled {
+    -fx-base: #d97708 !important;
+    -fx-background: #d97708 !important;
+    -fx-background-color: #d97708 !important;
+    -fx-control-inner-background: #d97708 !important;
+    -fx-text-fill: rgb(255, 255, 255) !important;
+    -fx-text-base-color: rgb(255, 255, 255) !important;
+}
+
+/* Status ComboBox Styles */
+.combo-box-table-cell {
+    -fx-font-size: 13px;
+    -fx-font-family: "Inter Regular";
+    -fx-font-weight: normal;
+}
+
+.combo-box-table-cell .text:contains("Pending") {
+    -fx-fill: #6B7280;
+}
+
+.combo-box-table-cell:contains("Pending") {
+    -fx-text-fill: #6B7280;
+}
+
+/* ComboBox in Table Cell */
+.table-cell .combo-box {
+    -fx-font-size: 13px;
+    -fx-font-family: "Inter Regular";
+    -fx-font-weight: normal;
+}
+
+.table-cell .combo-box .list-cell:contains("Pending") {
+    -fx-text-fill: #6B7280;
+}
+
+.table-cell .combo-box .list-cell .text:contains("Pending") {
+    -fx-fill: #6B7280;
+}
+
+/* Ensure ComboBox popup styling */
+.combo-box-popup .list-view {
+    -fx-font-size: 13px;
+    -fx-font-family: "Inter Regular";
+    -fx-font-weight: normal;
+}
+
+.combo-box-popup .list-view .list-cell:contains("Pending") {
+    -fx-text-fill: #6B7280;
+}
+
+.combo-box-popup .list-view .list-cell .text:contains("Pending") {
+    -fx-fill: #6B7280;
+}

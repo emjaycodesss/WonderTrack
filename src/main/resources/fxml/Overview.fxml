@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToHeight="false" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: #FFFAEC; -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-insets: 0; -fx-border-insets: 0; -fx-padding: 0;" styleClass="custom-scroll-pane" stylesheets="@../css/new-table-style.css, @../css/scroll-fix.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wondertrackxd.controller.overview.OverviewController">
+    <VBox minHeight="0.0" spacing="15.0" style="-fx-background-color: #FFFAEC; -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-insets: 0; -fx-border-insets: 0;" styleClass="custom-vbox">
+      <padding>
+         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+      </padding>
+      <HBox maxHeight="120.0" minHeight="100.0" prefHeight="110.0" spacing="15.0">
+         <children>
+            <VBox prefHeight="100.0" style="-fx-background-color: fffefc; -fx-border-color: fde998; -fx-border-radius: 6; -fx-background-radius: 6;" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="15.0" top="15.0" />
+               </padding>
+               <children>
+                  <HBox prefHeight="81.0" spacing="20.0">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                     <children>
+                        <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="totalOrdersLabel" text="Total Orders" textFill="#b4540a" wrapText="true">
+                                 <font>
+                                    <Font name="Inter Semi Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="totalOrdersCount" text="0" textFill="#92400d" wrapText="true">
+                                 <font>
+                                    <Font name="Inter Extra Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="totalOrdersDesc" text="Pending: 0 | In Progress: 0" textFill="#d97708" wrapText="true">
+                                 <font>
+                                    <Font name="Inter Semi Bold" size="10.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="-6.0" />
+                                 </padding>
+                              </Label>
+                              <Label fx:id="totalOrdersDesc1" text="Completed: 0 | Cancelled: 0" textFill="#d97708" wrapText="true">
+                                 <font>
+                                    <Font name="Inter Semi Bold" size="10.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="-6.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="100.0" style="-fx-background-color: fffefc; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="15.0" top="15.0" />
+               </padding>
+               <children>
+                  <HBox prefHeight="81.0" spacing="20.0">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                     <children>
+                        <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="Gross Sales" textFill="#b4540a" wrapText="true">
+                                 <font>
+                                    <Font name="Inter Semi Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="grossSalesAmount" text="₱00.00" textFill="#92400d" wrapText="true">
+                                 <font>
+                                    <Font name="Inter Extra Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="grossSalesDesc" text="↑/↓ 0% more/less than previous day" textFill="#d97708" wrapText="true">
+                                 <font>
+                                    <Font name="Inter Semi Bold" size="10.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="-6.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="100.0" style="-fx-background-color: fffefc; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="15.0" top="15.0" />
+               </padding>
+               <children>
+                  <HBox prefHeight="81.0" spacing="20.0">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                     <children>
+                        <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="Avg. Order Value" textFill="#b4540a" wrapText="true">
+                                 <font>
+                                    <Font name="Inter Semi Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="pendingOrdersCount" text="₱00.00" textFill="#92400d" wrapText="true">
+                                 <font>
+                                    <Font name="Inter Extra Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="pendingOrdersDesc" text="Customer spend per txn" textFill="#d97708" wrapText="true">
+                                 <font>
+                                    <Font name="Inter Semi Bold" size="10.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="-6.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="100.0" style="-fx-background-color: fffefc; -fx-border-color: fde998; -fx-border-radius: 6; -fx-background-radius: 6;" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="15.0" top="15.0" />
+               </padding>
+               <children>
+                  <HBox prefHeight="81.0" spacing="20.0">
+                     <padding>
+                        <Insets left="15.0" right="15.0" />
+                     </padding>
+                     <children>
+                        <VBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label text="Completion Rate" textFill="#b4540a" wrapText="true">
+                                 <font>
+                                    <Font name="Inter Semi Bold" size="15.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="completedOrdersCount" text="0.00%" textFill="#92400d" wrapText="true">
+                                 <font>
+                                    <Font name="Inter Extra Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="completedOrdersDesc" text="0 out of 0 completed orders" textFill="#d97708" wrapText="true">
+                                 <font>
+                                    <Font name="Inter Semi Bold" size="10.0" />
+                                 </font>
+                                 <padding>
+                                    <Insets top="-6.0" />
+                                 </padding>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox maxHeight="400.0" minHeight="350.0" prefHeight="380.0" spacing="15.0">
+         <children>
+            <VBox maxWidth="Infinity" minWidth="0.0" prefHeight="380.0" style="-fx-background-color: fffefb; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+               <children>
+                  <Label text="Daily Sales Trend" textFill="#92400d">
+                     <font>
+                        <Font name="Inter Semi Bold" size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <LineChart fx:id="salesTrendChart" maxHeight="320.0" maxWidth="Infinity" minHeight="280.0" prefHeight="300.0" style="-fx-background-color: transparent; -fx-padding: 10;" VBox.vgrow="ALWAYS">
+                     <xAxis>
+                        <CategoryAxis side="BOTTOM" tickLabelsVisible="true" tickMarkVisible="true" />
+                     </xAxis>
+                     <yAxis>
+                        <NumberAxis side="LEFT" tickLabelsVisible="true" tickMarkVisible="true" />
+                     </yAxis>
+                  </LineChart>
+               </children>
+            </VBox>
+            <VBox maxWidth="Infinity" minWidth="0.0" prefHeight="380.0" style="-fx-background-color: fffefb; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+               <children>
+                  <Label text="Flavor Distribution" textFill="#92400d">
+                     <font>
+                        <Font name="Inter Semi Bold" size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <PieChart fx:id="flavorDistributionChart" maxHeight="320.0" maxWidth="Infinity" minHeight="280.0" prefHeight="300.0" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox maxHeight="500.0" maxWidth="Infinity" minHeight="400.0" prefHeight="450.0" spacing="15.0" style="-fx-background-color: fffefb; -fx-border-color: fde998; -fx-background-radius: 6; -fx-border-radius: 6;" VBox.vgrow="ALWAYS">
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+         <children>
+            <Label text="Recent Orders" textFill="#92400d">
+               <font>
+                  <Font name="Inter Semi Bold" size="15.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <TableView fx:id="recentOrdersTable" maxHeight="380.0" maxWidth="Infinity" minHeight="350.0" prefHeight="370.0" styleClass="recent-orders-table" stylesheets="@../css/new-table-style.css" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </TableView>
+         </children>
+
+      </VBox>
+   </VBox>
+</ScrollPane>

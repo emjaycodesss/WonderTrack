@@ -1,0 +1,902 @@
+/* ScrollPane customization - keep only scroll bar hiding */
+.custom-scroll-pane {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-background-color: transparent;
+}
+
+/* Remove all table borders and interaction effects */
+.table-view,
+.recent-orders-table {
+    -fx-selection-bar: transparent;
+    -fx-selection-bar-non-focused: transparent;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+}
+
+.table-view .table-row-cell,
+.recent-orders-table .table-row-cell {
+    -fx-background-color: white;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-selection-bar: transparent;
+    -fx-selection-bar-non-focused: transparent;
+    -fx-cell-size: 35px;
+    -fx-text-fill: black;
+}
+
+.table-view .table-row-cell:odd,
+.recent-orders-table .table-row-cell:odd {
+    -fx-background-color: #fffaea;
+}
+
+.table-view .table-row-cell:hover,
+.recent-orders-table .table-row-cell:hover {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-selection-bar: transparent;
+    -fx-selection-bar-non-focused: transparent;
+}
+
+.table-view .table-row-cell:selected,
+.recent-orders-table .table-row-cell:selected {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-selection-bar: transparent;
+    -fx-selection-bar-non-focused: transparent;
+    -fx-text-fill: black;
+}
+
+.table-view .table-row-cell:focused,
+.recent-orders-table .table-row-cell:focused {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-selection-bar: transparent;
+    -fx-selection-bar-non-focused: transparent;
+    -fx-text-fill: black;
+}
+
+.table-view .table-row-cell:selected:focused,
+.recent-orders-table .table-row-cell:selected:focused {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-selection-bar: transparent;
+    -fx-selection-bar-non-focused: transparent;
+    -fx-text-fill: black;
+}
+
+.table-view .table-row-cell:odd:hover,
+.recent-orders-table .table-row-cell:odd:hover {
+    -fx-background-color: #fffaea;
+}
+
+.table-view .table-row-cell:odd:selected,
+.recent-orders-table .table-row-cell:odd:selected {
+    -fx-background-color: #fffaea;
+}
+
+.table-view .table-row-cell:odd:focused,
+.recent-orders-table .table-row-cell:odd:focused {
+    -fx-background-color: #fffaea;
+}
+
+.table-view .table-row-cell:odd:selected:focused,
+.recent-orders-table .table-row-cell:odd:selected:focused {
+    -fx-background-color: #fffaea;
+}
+
+.table-view .table-cell,
+.recent-orders-table .table-cell {
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 0 8px;
+    -fx-border-color: transparent;
+    -fx-text-fill: black;
+}
+
+.table-view .table-cell:hover,
+.recent-orders-table .table-cell:hover {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-selection-bar: transparent;
+    -fx-selection-bar-non-focused: transparent;
+}
+
+.table-view .table-cell:selected,
+.recent-orders-table .table-cell:selected {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-selection-bar: transparent;
+    -fx-selection-bar-non-focused: transparent;
+    -fx-text-fill: black;
+}
+
+.table-view .table-cell:focused,
+.recent-orders-table .table-cell:focused {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-selection-bar: transparent;
+    -fx-selection-bar-non-focused: transparent;
+    -fx-text-fill: black;
+}
+
+/* Remove table column headers borders */
+.table-view .column-header {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+    -fx-alignment: CENTER-LEFT;
+}
+
+.table-view .column-header-background {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header .label,
+.recent-orders-table .column-header .label {
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 6px;
+    -fx-text-fill: #b4540a;
+    -fx-font-family: "Inter Regular";
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+}
+
+/* Force all table headers to be left-aligned with proper styling */
+.table-view .column-header,
+.table-view .column-header .label,
+.table-view .table-column .label {
+    -fx-alignment: CENTER-LEFT !important;
+    -fx-text-alignment: LEFT !important;
+    -fx-text-fill: #b4540a !important;
+    -fx-font-family: "Inter Regular" !important;
+    -fx-font-size: 13px !important;
+    -fx-font-weight: normal !important;
+}
+
+/* Remove table container borders */
+.table-view .virtual-flow {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+.table-view .virtual-flow .viewport {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+/* Remove any remaining table borders */
+.table-view * {
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+}
+
+/* Hide ALL scroll bar components - vertical */
+.custom-scroll-pane .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+    -fx-min-width: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Hide ALL scroll bar components - horizontal */  
+.custom-scroll-pane .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
+    -fx-min-height: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Hide scroll bar buttons completely */
+.custom-scroll-pane .scroll-bar .increment-button,
+.custom-scroll-pane .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Hide scroll bar thumb */
+.custom-scroll-pane .scroll-bar .thumb {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Hide scroll bar track */
+.custom-scroll-pane .scroll-bar .track {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Hide scroll bar corner */
+.custom-scroll-pane .corner {
+    -fx-opacity: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+/* Remove focus effects */
+.custom-scroll-pane:focused {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+/* Enhanced ComboBox styling in table cells for proper text display */
+.table-view .table-cell .combo-box,
+.recent-orders-table .table-cell .combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-selection-bar: transparent;
+    -fx-pref-width: 130px;
+    -fx-min-width: 125px;
+    -fx-max-width: 140px;
+    -fx-padding: 4px 8px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.table-view .table-cell .combo-box:focused,
+.recent-orders-table .table-cell .combo-box:focused {
+    -fx-background-color: white;
+    -fx-border-color: #aaa;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+    -fx-selection-bar: transparent;
+    -fx-effect: null;
+}
+
+.table-view .table-cell .combo-box .arrow-button,
+.recent-orders-table .table-cell .combo-box .arrow-button {
+    -fx-background-color: white;
+    -fx-border-color: #ddd;
+    -fx-border-width: 0 0 0 1px;
+    -fx-background-radius: 0 3px 3px 0;
+    -fx-padding: 4px 6px;
+}
+
+/* Table ComboBox arrows use default styling */
+
+.table-view .table-cell .combo-box .list-cell,
+.recent-orders-table .table-cell .combo-box .list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: inherit;
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+    -fx-padding: 2px 4px;
+    -fx-text-alignment: left;
+    -fx-alignment: center-left;
+    -fx-pref-width: 120px;
+    -fx-min-width: 115px;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-selection-bar: transparent;
+    -fx-selection-bar-non-focused: transparent;
+}
+
+/* Enhanced dropdown list styling */
+.table-view .table-cell .combo-box .list-view,
+.recent-orders-table .table-cell .combo-box .list-view {
+    -fx-background-color: white;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.2), 5, 0, 0, 2);
+}
+
+.table-view .table-cell .combo-box .list-view .list-cell,
+.recent-orders-table .table-cell .combo-box .list-view .list-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 6px 8px;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-alignment: left;
+}
+
+.table-view .table-cell .combo-box .list-view .list-cell:hover,
+.recent-orders-table .table-cell .combo-box .list-view .list-cell:hover {
+    -fx-background-color: #f5f5f5;
+}
+
+.table-view .table-cell .combo-box .list-view .list-cell:selected,
+.recent-orders-table .table-cell .combo-box .list-view .list-cell:selected {
+    -fx-background-color: #e3f2fd;
+    -fx-text-fill: #1976d2;
+}
+
+.custom-vbox {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.custom-vbox:focused {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+.custom-scroll-pane * {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.custom-scroll-pane *:focused {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+.custom-scroll-pane .vbox,
+.custom-scroll-pane .hbox,
+.custom-scroll-pane .label,
+.custom-scroll-pane .image-view,
+.custom-scroll-pane .line-chart,
+.custom-scroll-pane .pie-chart {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.custom-scroll-pane .vbox:focused,
+.custom-scroll-pane .hbox:focused,
+.custom-scroll-pane .label:focused,
+.custom-scroll-pane .image-view:focused,
+.custom-scroll-pane .line-chart:focused,
+.custom-scroll-pane .pie-chart:focused {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+.custom-scroll-pane .region,
+.custom-scroll-pane .pane,
+.custom-scroll-pane .control {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.custom-scroll-pane .region:focused,
+.custom-scroll-pane .pane:focused,
+.custom-scroll-pane .control:focused {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+.custom-scroll-pane .scroll-pane .scroll-bar,
+.custom-scroll-pane .virtual-flow .scroll-bar {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.custom-scroll-pane .scroll-pane .scroll-bar:vertical,
+.custom-scroll-pane .virtual-flow .scroll-bar:vertical {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-max-width: 0;
+    -fx-min-width: 0;
+}
+
+.custom-scroll-pane .scroll-pane .scroll-bar:horizontal,
+.custom-scroll-pane .virtual-flow .scroll-bar:horizontal {
+    -fx-opacity: 0;
+    -fx-pref-height: 0;
+    -fx-max-height: 0;
+    -fx-min-height: 0;
+}
+
+.custom-scroll-pane .scroll-bar .increment-arrow,
+.custom-scroll-pane .scroll-bar .decrement-arrow {
+    -fx-opacity: 0;
+    -fx-pref-width: 0;
+    -fx-pref-height: 0;
+    -fx-max-width: 0;
+    -fx-max-height: 0;
+    -fx-min-width: 0;
+    -fx-min-height: 0;
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.root {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+* {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+*:focused {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+.custom-scroll-pane .content {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.custom-scroll-pane .content:focused {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+.custom-scroll-pane .viewport {
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.custom-scroll-pane .viewport:focused {
+    -fx-background-color: inherit;
+    -fx-border-color: transparent;
+    -fx-effect: null;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+.table-view .delete-button,
+.recent-orders-table .delete-button {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-background: transparent !important;
+    -fx-base: transparent !important;
+}
+
+.table-view .icon-button,
+.recent-orders-table .icon-button {
+    -fx-padding: 3px;
+    -fx-min-width: 24px;
+    -fx-min-height: 24px;
+    -fx-pref-width: 24px;
+    -fx-pref-height: 24px;
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+.table-view .icon-button:hover,
+.recent-orders-table .icon-button:hover,
+.table-view .icon-button:pressed,
+.recent-orders-table .icon-button:pressed,
+.table-view .icon-button:focused,
+.recent-orders-table .icon-button:focused {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-effect: null;
+}
+
+.table-view .delete-button:hover,
+.recent-orders-table .delete-button:hover,
+.table-view .delete-button:pressed,
+.recent-orders-table .delete-button:pressed,
+.table-view .delete-button:focused,
+.recent-orders-table .delete-button:focused,
+.table-view .edit-button:hover,
+.recent-orders-table .edit-button:hover,
+.table-view .edit-button:pressed,
+.recent-orders-table .edit-button:pressed,
+.table-view .edit-button:focused,
+.recent-orders-table .edit-button:focused {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-effect: null;
+    -fx-background: transparent !important;
+    -fx-base: transparent !important;
+}
+
+.table-view .edit-button,
+.recent-orders-table .edit-button {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-background: transparent !important;
+    -fx-base: transparent !important;
+}
+
+.table-view .table-column,
+.recent-orders-table .table-column {
+    -fx-alignment: CENTER-LEFT;
+}
+
+/* Left align the actions column */
+.table-view .table-column.actions-column {
+    -fx-alignment: CENTER-LEFT;
+}
+
+.table-view .table-cell.actions-cell,
+.recent-orders-table .table-cell.actions-cell {
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 0 16px 0 8px;
+    -fx-background-color: transparent !important;
+}
+
+.table-view .table-cell.actions-cell .button,
+.recent-orders-table .table-cell.actions-cell .button {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background: transparent !important;
+    -fx-base: transparent !important;
+}
+
+.table-view .column-header .label,
+.recent-orders-table .column-header .label {
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 6px;
+    -fx-text-fill: #b4540a;
+    -fx-font-family: "Inter Regular";
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+}
+
+.table-view .table-column,
+.recent-orders-table .table-column {
+    -fx-alignment: CENTER-LEFT;
+}
+
+/* Left align the actions column */
+.table-view .table-column.actions-column {
+    -fx-alignment: CENTER-LEFT;
+}
+
+.table-view .table-cell.actions-cell,
+.recent-orders-table .table-cell.actions-cell {
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 0 16px 0 8px;
+}
+
+.table-view .icon-button,
+.recent-orders-table .icon-button {
+    -fx-padding: 3px;
+    -fx-min-width: 24px;
+    -fx-min-height: 24px;
+    -fx-pref-width: 24px;
+    -fx-pref-height: 24px;
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+}
+
+.table-view .edit-button,
+.recent-orders-table .edit-button {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-background: transparent !important;
+    -fx-base: transparent !important;
+}
+
+.table-view .delete-button,
+.recent-orders-table .delete-button {
+    -fx-background-color: transparent !important;
+    -fx-border-color: transparent !important;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-background: transparent !important;
+    -fx-base: transparent !important;
+}
+
+/* Automatic price field styling */
+.text-field#priceField,
+.text-field.price-field {
+    -fx-text-fill: #83827b !important;
+    -fx-background-color: #FFE270;
+    -fx-border-color: #ffe680;
+    -fx-border-width: 1px;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+}
+
+.text-field#priceField:focused,
+.text-field.price-field:focused {
+    -fx-text-fill: #83827b !important;
+}
+
+.text-field#priceField:disabled,
+.text-field.price-field:disabled {
+    -fx-text-fill: #83827b !important;
+    -fx-opacity: 1.0;
+}
+
+/* ComboBox styling to maintain borders */
+.combo-box {
+    -fx-border-color: #ffe680;
+    -fx-border-width: 1px;
+    -fx-background-radius: 4px;
+    -fx-border-radius: 4px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.combo-box:focused {
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+.combo-box:showing {
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+.combo-box:pressed {
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+}
+
+.combo-box .list-cell {
+    -fx-border-color: transparent;
+    -fx-background-radius: 4px;
+}
+
+.combo-box .arrow-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0 4px 4px 0;
+}
+
+.combo-box .arrow-button:hover {
+    -fx-background-color: #fef7da;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0 4px 4px 0;
+}
+
+.combo-box .arrow-button:pressed {
+    -fx-background-color: #fef7da;
+    -fx-border-color: transparent;
+    -fx-background-radius: 0 4px 4px 0;
+}
+
+/* ComboBox text area styling */
+.combo-box .text-input {
+    -fx-background-radius: 4px 0 0 4px;
+    -fx-border-radius: 4px 0 0 4px;
+}
+
+/* Specific styling for product category combo */
+#productCategoryCombo {
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+#productCategoryCombo:focused {
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+#productCategoryCombo:showing {
+    -fx-border-color: #ffe680 !important;
+    -fx-border-width: 1px !important;
+    -fx-background-radius: 4px !important;
+    -fx-border-radius: 4px !important;
+    -fx-focus-color: transparent !important;
+    -fx-faint-focus-color: transparent !important;
+}
+
+#productCategoryCombo .arrow-button {
+    -fx-background-radius: 0 4px 4px 0 !important;
+}
+
+#productCategoryCombo .text-input {
+    -fx-background-radius: 4px 0 0 4px !important;
+    -fx-border-radius: 4px 0 0 4px !important;
+}
+
+/* View Receipt Button Styling */
+.table-view .view-receipt-button {
+    -fx-font-size: 13px;
+    -fx-background-color: transparent;
+    -fx-text-fill: #1a73e8;
+    -fx-cursor: hand;
+    -fx-padding: 0;
+}
+
+/* Status ComboBox Text Styling */
+.table-view .table-cell .combo-box .list-cell {
+    -fx-font-family: "Inter Regular";
+    -fx-font-size: 13px;
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+}
+
+/* View Receipt Button in Actions Column */
+.table-view .table-cell .button {
+    -fx-background-color: #d97708;
+    -fx-text-fill: white;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-font-size: 13px;
+    -fx-padding: 4px 8px;
+    -fx-cursor: hand;
+}
+
+/* Status Column ComboBox */
+.table-view .table-cell .combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #ddd;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+.table-view .table-cell .combo-box .list-cell {
+    -fx-font-family: "Inter Regular";
+    -fx-font-size: 13px;
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+    -fx-padding: 0 4px;
+}
+
+.table-view .table-cell .combo-box .list-view .list-cell {
+    -fx-font-family: "Inter Regular";
+    -fx-font-size: 13px;
+    -fx-text-fill: black;
+    -fx-padding: 4px 8px;
+}
+
+.table-view .table-cell .combo-box .list-view .list-cell:hover {
+    -fx-background-color: #f5f5f5;
+}
+
+.table-view .table-cell .combo-box .list-view .list-cell:selected {
+    -fx-background-color: #e8e8e8;
+}
+
+/* Orders Table - View Receipt Button */
+#ordersTable .table-cell .button {
+    -fx-font-size: 13px !important;
+    -fx-background-color: #d97708;
+    -fx-text-fill: white;
+    -fx-border-radius: 4px;
+    -fx-background-radius: 4px;
+    -fx-padding: 4px 8px;
+    -fx-cursor: hand;
+}
+
+/* Orders Table - Status ComboBox */
+#ordersTable .table-cell .combo-box {
+    -fx-background-color: white;
+    -fx-border-color: #fde68a !important;
+    -fx-border-width: 1px;
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+}
+
+#ordersTable .table-cell .combo-box:hover {
+    -fx-border-color: #fde68a !important;
+}
+
+#ordersTable .table-cell .combo-box:focused {
+    -fx-border-color: #fde68a !important;
+    -fx-background-color: white;
+}
+
+#ordersTable .table-cell .combo-box:showing {
+    -fx-border-color: #fde68a !important;
+    -fx-background-color: white;
+}
+
+#ordersTable .table-cell .combo-box .list-cell {
+    -fx-font-family: "Inter Regular" !important;
+    -fx-font-size: 13px !important;
+    -fx-font-weight: normal !important;
+    -fx-text-fill: black;
+    -fx-background-color: transparent;
+    -fx-padding: 0 4px;
+}
+
+#ordersTable .table-cell .combo-box .list-view {
+    -fx-border-color: #fde68a !important;
+    -fx-background-color: white;
+}
+
+#ordersTable .table-cell .combo-box .list-view .list-cell {
+    -fx-font-family: "Inter Regular" !important;
+    -fx-font-size: 13px !important;
+    -fx-font-weight: normal !important;
+    -fx-text-fill: black;
+    -fx-padding: 4px 8px;
+}
+
+#ordersTable .table-cell .combo-box .list-view .list-cell:hover {
+    -fx-background-color: #f5f5f5;
+}
+
+#ordersTable .table-cell .combo-box .list-view .list-cell:selected {
+    -fx-background-color: #e8e8e8;
+}
+
+/* Comprehensive table header styling for all tables */
+.table-view .column-header .label,
+.recent-orders-table .column-header .label,
+#ordersTable .column-header .label,
+#recentOrdersTable .column-header .label,
+#categoriesTable .column-header .label,
+#productsTable .column-header .label {
+    -fx-alignment: CENTER-LEFT;
+    -fx-padding: 6px;
+    -fx-text-fill: #b4540a;
+    -fx-font-family: "Inter Regular";
+    -fx-font-size: 13px;
+    -fx-font-weight: normal;
+}

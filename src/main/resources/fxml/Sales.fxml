@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<ScrollPane fitToHeight="false" fitToWidth="true" hbarPolicy="NEVER" style="-fx-background-color: #FFFAEC; -fx-focus-color: transparent; -fx-faint-focus-color: transparent; -fx-background-insets: 0; -fx-border-insets: 0; -fx-padding: 0;" styleClass="custom-scroll-pane" stylesheets="@../css/new-table-style.css, @../css/scroll-fix.css" vbarPolicy="NEVER" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.wondertrackxd.controller.sales.SalesController">
+   <VBox spacing="15.0" style="-fx-background-color: #FFFAEC;">
+      <padding>
+         <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+      </padding>
+
+      <!-- KPI Cards Section -->
+      <HBox spacing="15.0">
+         <children>
+            <!-- Today's Sales Card -->
+            <VBox prefHeight="100.0" style="-fx-background-color: #fffefb; -fx-border-color: #fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/total_revenue_icon.png" />
+                           </image>
+                        </ImageView>
+                        <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="todaySalesAmount" text="₱0.00" textFill="#92400d">
+                                 <font>
+                                    <Font name="Inter Extra Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="todaySalesDesc" text="Today's Sales" textFill="#c24c00">
+                                 <font>
+                                    <Font name="Inter Medium" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+
+            <!-- Transactions Count Card -->
+            <VBox prefHeight="100.0" style="-fx-background-color: #fffefb; -fx-border-color: #fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/total_orders_icon.png" />
+                           </image>
+                        </ImageView>
+                        <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="transactionsCount" text="0" textFill="#92400d">
+                                 <font>
+                                    <Font name="Inter Extra Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="transactionsDesc" text="Transactions Today" textFill="#c24c00">
+                                 <font>
+                                    <Font name="Inter Medium" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+
+            <!-- Average Ticket Card -->
+            <VBox prefHeight="100.0" style="-fx-background-color: #fffefb; -fx-border-color: #fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/gross_sales_icon.png" />
+                           </image>
+                        </ImageView>
+                        <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="averageTicketAmount" text="₱0.00" textFill="#92400d">
+                                 <font>
+                                    <Font name="Inter Extra Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="averageTicketDesc" text="Average Ticket" textFill="#c24c00">
+                                 <font>
+                                    <Font name="Inter Medium" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+
+            <!-- Digital Payment Ratio Card -->
+            <VBox prefHeight="100.0" style="-fx-background-color: #fffefb; -fx-border-color: #fde998; -fx-background-radius: 6; -fx-border-radius: 6;" HBox.hgrow="ALWAYS">
+               <padding>
+                  <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+               </padding>
+               <children>
+                  <HBox alignment="CENTER_LEFT" spacing="10.0">
+                     <children>
+                        <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../icons/completion_rate_icon.png" />
+                           </image>
+                        </ImageView>
+                        <VBox spacing="2.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <Label fx:id="digitalPaymentRatio" text="0%" textFill="#92400d">
+                                 <font>
+                                    <Font name="Inter Extra Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="digitalPaymentDesc" text="Digital Payment Ratio" textFill="#c24c00">
+                                 <font>
+                                    <Font name="Inter Medium" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </VBox>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+
+      <!-- Sales Table Section (matching Orders page format exactly) -->
+      <VBox spacing="15.0" style="-fx-background-color: #fffefb; -fx-border-color: #fde998; -fx-background-radius: 6; -fx-border-radius: 6;">
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+         <children>
+            <!-- Table Header with integrated filters (exactly like Orders page) -->
+            <HBox alignment="CENTER_LEFT" spacing="15.0">
+               <children>
+                  <Label text="Sales History" textFill="#92400d">
+                     <font>
+                        <Font name="Inter Semi Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <HBox alignment="CENTER_RIGHT" spacing="15.0" HBox.hgrow="ALWAYS">
+                     <children>
+                        <ComboBox fx:id="paymentMethodFilter" prefWidth="120.0" promptText="Payment Method" styleClass="filter-control" />
+                        <DatePicker fx:id="fromDatePicker" prefWidth="130.0" promptText="From Date" styleClass="filter-control" />
+                        <DatePicker fx:id="toDatePicker" prefWidth="130.0" promptText="To Date" styleClass="filter-control" />
+                        <TextField fx:id="searchField" prefWidth="150.0" promptText="Search sales..." styleClass="filter-control" />
+                        <ComboBox fx:id="sortOrderCombo" prefWidth="120.0" promptText="Sort by" styleClass="filter-control" />
+                        <Button fx:id="clearFiltersButton" style="-fx-background-color: #d97708;" text="Clear Filters" textFill="WHITE" />
+                     </children>
+                  </HBox>
+               </children>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </HBox>
+
+            <!-- Sales Table (exactly matching Orders table structure) -->
+            <TableView fx:id="salesTable" maxHeight="320.0" maxWidth="Infinity" minHeight="280.0" prefHeight="300.0" styleClass="recent-orders-table" stylesheets="@../css/new-table-style.css" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="saleIdColumn" minWidth="120.0" prefWidth="140.0" text="Sale ID" />
+                  <TableColumn fx:id="customerNameColumn" minWidth="80.0" prefWidth="100.0" text="Customer" />
+                  <TableColumn fx:id="itemsColumn" minWidth="150.0" prefWidth="180.0" text="Items" />
+                  <TableColumn fx:id="amountColumn" minWidth="80.0" prefWidth="100.0" text="Amount" />
+                  <TableColumn fx:id="paymentMethodColumn" minWidth="90.0" prefWidth="110.0" text="Payment" />
+                  <TableColumn fx:id="dateTimeColumn" minWidth="120.0" prefWidth="140.0" text="Date &amp; Time" />
+                  <TableColumn fx:id="statusColumn" minWidth="80.0" prefWidth="100.0" styleClass="status-column" text="Status" />
+                  <TableColumn fx:id="actionsColumn" minWidth="120.0" prefWidth="160.0" styleClass="actions-column" text="Actions" />
+               </columns>
+            </TableView>
+
+            <!-- Pagination (exactly matching Orders page) -->
+            <HBox alignment="CENTER" spacing="15.0">
+               <children>
+                  <Button fx:id="prevPageBtn" mnemonicParsing="false" style="-fx-background-color: #fef7da; -fx-border-color: #fdf1bb;" text="Previous">
+                     <font>
+                        <Font name="Inter Regular" size="13.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="pageLabel" text="Page 1 of 1" textFill="#b4540a">
+                     <font>
+                        <Font name="Inter Regular" size="13.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="nextPageBtn" mnemonicParsing="false" style="-fx-background-color: #fef7da; -fx-border-color: #fdf1bb;" text="Next">
+                     <font>
+                        <Font name="Inter Regular" size="13.0" />
+                     </font>
+                  </Button>
+                  <Label fx:id="resultsInfoLabel" text="Showing results" textFill="#b4540a" HBox.hgrow="ALWAYS">
+                     <font>
+                        <Font name="Inter Regular" size="13.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+         </children>
+      </VBox>
+   </VBox>
+</ScrollPane> 
