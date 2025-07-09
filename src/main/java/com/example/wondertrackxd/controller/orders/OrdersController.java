@@ -64,6 +64,9 @@ import java.util.stream.Collectors;
 import java.util.Objects;
 import javafx.animation.PauseTransition;
 import javafx.util.Duration;
+import com.example.wondertrackxd.controller.analytics.AnalyticsController;
+import com.example.wondertrackxd.controller.analytics.DataService;
+import com.example.wondertrackxd.controller.header.HeaderController;
 
 /**
  * OrdersController manages the complete order workflow including form, table, and filtering
@@ -141,7 +144,7 @@ public class OrdersController {
     private List<DynamicOrderItem> currentDynamicOrderItems = new ArrayList<>();
     private int totalQuantity = 0;
     private int currentPage = 1;
-    private final int itemsPerPage = 10;
+    private final int itemsPerPage = 15;
 
     private static final String RECEIPT_SEPARATOR = "--------------------------------------";
     
@@ -487,7 +490,7 @@ public class OrdersController {
      * Setup order status column with always-visible ComboBox dropdown and color-coded text
      */
     private void setupOrderStatusColumn() {
-        logger.info("🎨 Setting up always-visible ComboBox order status column...");
+        logger.info("🎨 Setting up order status column with real-time updates...");
         
         try {
             ObservableList<String> orderStatusOptions = FXCollections.observableArrayList(
@@ -495,25 +498,47 @@ public class OrdersController {
             );
             
             orderStatusColumn.setCellFactory(column -> {
-                TableCell<RecentOrder, String> cell = new TableCell<RecentOrder, String>() {
-                    private final ComboBox<String> comboBox = new ComboBox<>(orderStatusOptions);
-                    private RecentOrder currentOrder;
-                    private boolean isUpdating = false;
+                return new TableCell<RecentOrder, String>() {
+                    private final ComboBox<String> comboBox;
                     
                     {
+                        // Initialize ComboBox with status options
+                        comboBox = new ComboBox<>(orderStatusOptions);
                         comboBox.setMaxWidth(Double.MAX_VALUE);
                         comboBox.setPrefWidth(115);
                         comboBox.setMinWidth(110);
                         comboBox.setStyle("-fx-font-size: 11px; -fx-font-weight: bold; -fx-background-color: white; " +
-                                         "-fx-border-color: #ddd; -fx-border-width: 1px; -fx-border-radius: 3px; " +
-                                         "-fx-background-radius: 3px; -fx-padding: 3px 6px;");
+                                        "-fx-border-color: #ddd; -fx-border-width: 1px; -fx-border-radius: 3px; " +
+                                        "-fx-background-radius: 3px; -fx-padding: 3px 6px;");
                         
-                        comboBox.setButtonCell(new ListCell<String>() {
+                        // Handle status changes
+                        comboBox.setOnAction(event -> {
+                            RecentOrder order = getTableRow().getItem();
+                            if (order != null && comboBox.getValue() != null) {
+                                String oldStatus = order.getStatus();
+                                String newStatus = comboBox.getValue();
+                                
+                                if (!newStatus.equals(oldStatus)) {
+                                    // Update order status
+                                    order.setStatus(newStatus);
+                                    
+                                    // Handle backend updates
+                                    handleOrderStatusChangeDirectly(order, oldStatus, newStatus);
+                                    
+                                    // Log the change
+                                    logger.info("🎯 Order status updated: " + order.getOrderId() + 
+                                              " changed from " + oldStatus + " to " + newStatus);
+                                }
+                            }
+                        });
+                        
+                        // Style the ComboBox items
+                        comboBox.setCellFactory(listView -> new ListCell<String>() {
                             @Override
                             protected void updateItem(String item, boolean empty) {
                                 super.updateItem(item, empty);
                                 if (empty || item == null) {
-                                    setText("");
+                                    setText(null);
                                     setStyle("");
                                 } else {
                                     setText(item);
@@ -525,26 +550,31 @@ public class OrdersController {
                                         default -> "#6B7280";             // Gray
                                     };
                                     setStyle("-fx-text-fill: " + textColor + "; -fx-font-weight: bold; " +
-                                           "-fx-font-size: 11px; -fx-padding: 2px 4px; " +
-                                           "-fx-text-alignment: left; -fx-alignment: center-left;");
+                                            "-fx-font-size: 11px; -fx-padding: 2px 4px;");
                                 }
                             }
                         });
                         
-                        comboBox.setOnAction(event -> {
-                            if (isUpdating || currentOrder == null || comboBox.getValue() == null) {
-                                return;
-                            }
-                            
-                            String oldStatus = currentOrder.getOrderStatus();
-                            String newStatus = comboBox.getValue();
-                            
-                            if (!newStatus.equals(oldStatus)) {
-                                currentOrder.setOrderStatus(newStatus);
-                                handleOrderStatusChangeDirectly(currentOrder, oldStatus, newStatus);
-                                Platform.runLater(() -> ordersTable.refresh());
-                                logger.info("🎯 Order status updated: " + currentOrder.getOrderId() + 
-                                          " changed from " + oldStatus + " to " + newStatus);
+                        // Style the button cell (selected value)
+                        comboBox.setButtonCell(new ListCell<String>() {
+                            @Override
+                            protected void updateItem(String item, boolean empty) {
+                                super.updateItem(item, empty);
+                                if (empty || item == null) {
+                                    setText(null);
+                                    setStyle("");
+                                } else {
+                                    setText(item);
+                                    String textColor = switch (item) {
+                                        case "Pending" -> "#92400E";      // Brown
+                                        case "In Progress" -> "#1E40AF";  // Blue
+                                        case "Completed" -> "#065F46";    // Green
+                                        case "Cancelled" -> "#991B1B";    // Red
+                                        default -> "#6B7280";             // Gray
+                                    };
+                                    setStyle("-fx-text-fill: " + textColor + "; -fx-font-weight: bold; " +
+                                            "-fx-font-size: 11px; -fx-padding: 2px 4px;");
+                                }
                             }
                         });
                     }
@@ -552,25 +582,24 @@ public class OrdersController {
                     @Override
                     protected void updateItem(String status, boolean empty) {
                         super.updateItem(status, empty);
+                        
                         if (empty || getTableRow() == null || getTableRow().getItem() == null) {
                             setGraphic(null);
-                            currentOrder = null;
                         } else {
-                            currentOrder = (RecentOrder) getTableRow().getItem();
-                            isUpdating = true;
-                            comboBox.setValue(status);
-                            isUpdating = false;
+                            RecentOrder order = getTableRow().getItem();
+                            comboBox.setValue(order.getStatus());
                             setGraphic(comboBox);
                         }
                     }
                 };
-                return cell;
             });
             
             orderStatusColumn.setEditable(false);
             orderStatusColumn.setSortable(true);
             orderStatusColumn.setMinWidth(110);
             orderStatusColumn.setPrefWidth(120);
+            
+            logger.info("✅ Order status column setup completed with real-time updates");
             
         } catch (Exception e) {
             logger.log(Level.SEVERE, "❌ Error setting up order status column", e);
@@ -826,24 +855,107 @@ public class OrdersController {
     }
     
     /**
-     * Handle order status change directly from ComboBox
+     * Handle order status change and create sales record if needed
      */
     private void handleOrderStatusChangeDirectly(RecentOrder order, String oldStatus, String newStatus) {
+        logger.info("🔄 Handling order status change: " + order.getOrderId() + " from " + oldStatus + " to " + newStatus);
+        
         try {
-            // Save changes to file
-            if (saveOrdersToFile()) {
-                logger.info("💾 Order status change saved for: " + order.getOrderId());
-                updateStatusStatistics();
-            } else {
-                logger.warning("⚠️ Failed to save order status change");
-                // Revert the change
-                order.setOrderStatus(oldStatus);
-                showAlert(Alert.AlertType.ERROR, "Error", "Failed to save order status change");
+            // Update the order status
+            order.setStatus(newStatus);
+            
+            // Handle sales record creation/removal based on status changes
+            DataService dataService = DataService.getInstance();
+            
+            if ("Completed".equals(newStatus) && !"Completed".equals(oldStatus)) {
+                // Order is being completed - create sales record
+                if (dataService.createSalesRecord(order)) {
+                    logger.info("✅ Sales record created for order: " + order.getOrderId());
+                    
+                    // Refresh analytics view if available
+                    try {
+                        if (HeaderController.getInstance() != null && 
+                            HeaderController.getInstance().getAnalyticsController() != null) {
+                            HeaderController.getInstance().getAnalyticsController().refreshAnalytics();
+                            logger.info("✅ Analytics view refreshed successfully");
+                        }
+                    } catch (Exception e) {
+                        logger.log(Level.WARNING, "⚠️ Could not refresh analytics view", e);
+                    }
+                    
+                    // Refresh sales view if available
+                    try {
+                        if (HeaderController.getInstance() != null && 
+                            HeaderController.getInstance().getSalesController() != null) {
+                            HeaderController.getInstance().getSalesController().refreshSalesData();
+                            logger.info("✅ Sales view refreshed successfully");
+                        } else {
+                            logger.warning("⚠️ SalesController not available through HeaderController");
+                        }
+                    } catch (Exception e) {
+                        logger.log(Level.WARNING, "⚠️ Could not refresh sales view", e);
+                    }
+                } else {
+                    logger.severe("❌ Failed to create sales record for order: " + order.getOrderId());
+                }
+            } else if ("Completed".equals(oldStatus) && !"Completed".equals(newStatus)) {
+                // Order is being changed from completed to another status - remove sales record
+                if (dataService.removeSalesRecord(order.getOrderId())) {
+                    logger.info("✅ Sales record removed for order: " + order.getOrderId());
+                    
+                    // Refresh analytics view if available
+                    try {
+                        if (HeaderController.getInstance() != null && 
+                            HeaderController.getInstance().getAnalyticsController() != null) {
+                            HeaderController.getInstance().getAnalyticsController().refreshAnalytics();
+                            logger.info("✅ Analytics view refreshed successfully");
+                        }
+                    } catch (Exception e) {
+                        logger.log(Level.WARNING, "⚠️ Could not refresh analytics view", e);
+                    }
+                    
+                    // Refresh sales view if available
+                    try {
+                        if (HeaderController.getInstance() != null && 
+                            HeaderController.getInstance().getSalesController() != null) {
+                            HeaderController.getInstance().getSalesController().refreshSalesData();
+                            logger.info("✅ Sales view refreshed successfully");
+                        } else {
+                            logger.warning("⚠️ SalesController not available through HeaderController");
+                        }
+                    } catch (Exception e) {
+                        logger.log(Level.WARNING, "⚠️ Could not refresh sales view", e);
+                    }
+                } else {
+                    logger.warning("⚠️ No sales record found to remove for order: " + order.getOrderId());
+                }
             }
+            
+            // Persist change to orders.txt
+            if (saveOrdersToFile()) {
+                logger.info("💾 Order status persisted to file successfully");
+
+                // Instead of re-loading the whole data set (which caused flicker & race-conditions),
+                // simply refresh the current in-memory lists & UI.
+                Platform.runLater(() -> {
+                    // Re-apply active filters & pagination so the row stays visible/hidden correctly
+                    applyFiltersAsync();           // keeps filtering logic consistent
+                    updateStatusStatistics();      // refresh status counts displayed elsewhere
+                    ordersTable.refresh();         // lightweight table refresh for visual update
+                });
+
+                // Notify analytics to refresh (sales controller already handled above for Completed)
+                if (HeaderController.getInstance() != null && HeaderController.getInstance().getAnalyticsController() != null) {
+                    HeaderController.getInstance().getAnalyticsController().refreshAnalytics();
+                }
+            } else {
+                logger.severe("❌ Failed to save order status change – UI rolled back to previous value");
+                order.setStatus(oldStatus);          // rollback model to maintain consistency
+                Platform.runLater(ordersTable::refresh);
+            }
+            
         } catch (Exception e) {
             logger.log(Level.SEVERE, "❌ Error handling order status change", e);
-            order.setOrderStatus(oldStatus); // Revert
-            showAlert(Alert.AlertType.ERROR, "Error", "Error updating order status: " + e.getMessage());
         }
     }
     

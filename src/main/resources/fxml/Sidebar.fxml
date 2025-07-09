@@ -60,7 +60,7 @@
                <graphic>
                   <ImageView fitHeight="15.0" fitWidth="36.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../icons/sales_icon.png" />
+                        <Image url="@../icons/sales_tab_icon.png" />
                      </image>
                   </ImageView>
                </graphic>

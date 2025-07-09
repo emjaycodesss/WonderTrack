@@ -12,6 +12,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.control.Label;
 import javafx.application.Platform;
+import javafx.scene.control.Tooltip;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -50,15 +51,15 @@ public class AnalyticsController implements Initializable {
     @FXML private BarChart<Number, String> topFlavorsChart;
     @FXML private BarChart<String, Number> monthlyRevenueChart;
 
-    // Data storage - Professional POS separation
-    private List<RecentOrder> allOrders = new ArrayList<>();      // All orders (pending, completed, cancelled)
-    private List<SalesRecord> allSales = new ArrayList<>();       // Only completed sales for analytics
+    // Data Management 
+    private List<SalesRecord> allSales = new ArrayList<>();
+    private List<RecentOrder> allOrders = new ArrayList<>();
+    private DataService dataService = DataService.getInstance();
+    private int currentPage = 1;
+    private final int itemsPerPage = 15;
     
     private static final String ORDERS_FILE = "src/main/resources/txtFiles/orders.txt";
     private static final String SALES_FILE = "src/main/resources/txtFiles/sales.txt";
-    
-    // Data service for professional POS operations
-    private DataService dataService = new DataService();
     
     // Current time period filter
     private String currentTimePeriod = "Last 30 Days";
@@ -246,68 +247,186 @@ public class AnalyticsController implements Initializable {
     }
 
     /**
-     * Update KPI cards with real calculated values using professional POS separation
+     * Update KPI cards with real calculated values
+     * Handles all sales metrics and order management KPIs
      */
     private void updateKPICards() {
-        // Get filtered data for current time period
-        List<RecentOrder> filteredOrders = getFilteredOrders();
-        List<SalesRecord> filteredSales = getFilteredSales();
+        logger.info("📊 Updating KPI cards...");
         
-        // Order management metrics (from filtered orders)
-        int totalOrders = filteredOrders.size();
-        long completedOrders = filteredOrders.stream()
-            .filter(order -> "Completed".equals(order.getStatus()))
-            .count();
-        double completionRate = totalOrders > 0 ? (completedOrders * 100.0) / totalOrders : 0.0;
-        
-        // Revenue metrics (from filtered sales - only completed transactions)
-        double totalRevenue = filteredSales.stream()
-            .mapToDouble(sale -> parseAmount(sale.getSaleAmount()))
-            .sum();
-        
-        // Calculate average order value from filtered sales data
-        double avgOrderValue = filteredSales.size() > 0 ? totalRevenue / filteredSales.size() : 0.0;
-        
-        // Find best selling item from filtered sales data
-        String bestSellingItem = findBestSellingItem(filteredSales);
-        
-        // Calculate customer retention from filtered sales data
-        double customerRetention = calculateCustomerRetention(filteredSales);
-        
-        // Calculate growth rate from filtered sales data
-        double growthRate = calculateGrowthRate(filteredSales);
-        
-        // Update labels (check if they exist in FXML)
-        if (totalOrdersLabel != null) {
-            totalOrdersLabel.setText(String.format("%,d", totalOrders));
+        try {
+            // Get filtered data for current time period
+            List<RecentOrder> filteredOrders = getFilteredOrders();
+            List<SalesRecord> filteredSales = getFilteredSales();
+            
+            logger.info("📊 Processing " + filteredOrders.size() + " orders and " + filteredSales.size() + " sales");
+            
+            // 1. Total Orders (includes all statuses)
+            int totalOrders = filteredOrders.size();
+            
+            // 2. Completion Rate
+            long completedOrders = filteredOrders.stream()
+                .filter(order -> "Completed".equals(order.getStatus()))
+                .count();
+            double completionRate = totalOrders > 0 ? (completedOrders * 100.0) / totalOrders : 0.0;
+            
+            // 3. Total Revenue (only from completed sales)
+            double totalRevenue = filteredSales.stream()
+                .mapToDouble(sale -> {
+                    try {
+                        return Double.parseDouble(sale.getSaleAmount().replace("₱", "").replace(",", "").trim());
+                    } catch (NumberFormatException e) {
+                        logger.warning("⚠️ Invalid sale amount format: " + sale.getSaleAmount());
+                        return 0.0;
+                    }
+                })
+                .sum();
+            
+            // 4. Average Order Value
+            double avgOrderValue = completedOrders > 0 ? totalRevenue / completedOrders : 0.0;
+            
+            // 5. Customer Retention
+            Map<String, Long> customerFrequency = filteredSales.stream()
+                .filter(sale -> sale.getContactNumber() != null && !sale.getContactNumber().trim().isEmpty())
+                .collect(Collectors.groupingBy(
+                    SalesRecord::getContactNumber,
+                    Collectors.counting()
+                ));
+            
+            long totalCustomers = customerFrequency.size();
+            long returningCustomers = customerFrequency.values().stream()
+                .filter(count -> count > 1)
+                .count();
+            
+            double customerRetention = totalCustomers > 0 ? (returningCustomers * 100.0) / totalCustomers : 0.0;
+            
+            // 6. Growth Rate
+            LocalDate[] currentPeriod = getDateRangeForPeriod(currentTimePeriod);
+            LocalDate[] previousPeriod = getPreviousPeriod(currentPeriod[0], currentPeriod[1]);
+            
+            double currentPeriodRevenue = filteredSales.stream()
+                .mapToDouble(sale -> parseAmount(sale.getSaleAmount()))
+                .sum();
+                
+            double previousPeriodRevenue = allSales.stream()
+                .filter(sale -> isSaleInDateRange(sale, previousPeriod[0], previousPeriod[1]))
+                .mapToDouble(sale -> parseAmount(sale.getSaleAmount()))
+                .sum();
+            
+            double growthRate = previousPeriodRevenue > 0 ? 
+                ((currentPeriodRevenue - previousPeriodRevenue) / previousPeriodRevenue) * 100.0 : 0.0;
+            
+            // 7. Best Selling Item
+            Map<String, Integer> itemSales = new HashMap<>();
+            for (SalesRecord sale : filteredSales) {
+                String[] items = sale.getItemsSold().split(";");
+                for (String item : items) {
+                    String flavorName = extractFlavorName(item.trim());
+                    int quantity = extractQuantity(item.trim());
+                    itemSales.merge(flavorName, quantity, Integer::sum);
+                }
+            }
+            
+            String bestSellingItem = itemSales.entrySet().stream()
+                .max(Map.Entry.comparingByValue())
+                .map(Map.Entry::getKey)
+                .orElse("No sales");
+                
+            int bestSellingQuantity = itemSales.getOrDefault(bestSellingItem, 0);
+            
+            // Update UI labels with validation
+            Platform.runLater(() -> {
+                try {
+                    if (totalOrdersLabel != null) {
+                        totalOrdersLabel.setText(String.format("%,d", totalOrders));
+                        totalOrdersLabel.setTooltip(new Tooltip(
+                            String.format("Total Orders: %d%nCompleted: %d%nPending/Other: %d",
+                            totalOrders, completedOrders, totalOrders - completedOrders)
+                        ));
+                    }
+                    
+                    if (totalRevenueLabel != null) {
+                        totalRevenueLabel.setText(String.format("₱%,.0f", totalRevenue));
+                        totalRevenueLabel.setTooltip(new Tooltip(
+                            String.format("Total Revenue: ₱%,.2f%nFrom %d completed sales",
+                            totalRevenue, filteredSales.size())
+                        ));
+                    }
+                    
+                    if (avgOrderValueLabel != null) {
+                        avgOrderValueLabel.setText(String.format("₱%.1f", avgOrderValue));
+                        avgOrderValueLabel.setTooltip(new Tooltip(
+                            String.format("Average Order Value%nCalculated from %d completed orders",
+                            completedOrders)
+                        ));
+                    }
+                    
+                    if (customerRetentionLabel != null) {
+                        customerRetentionLabel.setText(String.format("%.0f%%", customerRetention));
+                        customerRetentionLabel.setTooltip(new Tooltip(
+                            String.format("Customer Retention%nReturning Customers: %d%nTotal Customers: %d",
+                            returningCustomers, totalCustomers)
+                        ));
+                    }
+                    
+                    if (completionRateLabel != null) {
+                        completionRateLabel.setText(String.format("%.1f%%", completionRate));
+                        completionRateLabel.setTooltip(new Tooltip(
+                            String.format("Completion Rate%nCompleted: %d%nTotal Orders: %d",
+                            completedOrders, totalOrders)
+                        ));
+                    }
+                    
+                    if (bestSellingItemLabel != null) {
+                        bestSellingItemLabel.setText(bestSellingItem);
+                        bestSellingItemLabel.setTooltip(new Tooltip(
+                            String.format("%s%n%d units sold this period",
+                            bestSellingItem, bestSellingQuantity)
+                        ));
+                    }
+                    
+                    if (growthRateLabel != null) {
+                        String growthText = String.format("%s%.1f%%", growthRate >= 0 ? "+" : "", growthRate);
+                        growthRateLabel.setText(growthText);
+                        growthRateLabel.setStyle(growthRate >= 0 ? "-fx-text-fill: #22c55e;" : "-fx-text-fill: #ef4444;");
+                        growthRateLabel.setTooltip(new Tooltip(
+                            String.format("Growth Rate%nCurrent Period: ₱%,.2f%nPrevious Period: ₱%,.2f",
+                            currentPeriodRevenue, previousPeriodRevenue)
+                        ));
+                    }
+                    
+                    logger.info(String.format("""
+                        ✅ KPI Cards Updated:
+                        📊 Total Orders: %d (%.1f%% completion)
+                        💰 Total Revenue: ₱%,.2f (avg ₱%.2f per order)
+                        👥 Customer Retention: %.1f%%
+                        📈 Growth Rate: %.1f%%
+                        🏆 Best Seller: %s (%d units)
+                        """,
+                        totalOrders, completionRate,
+                        totalRevenue, avgOrderValue,
+                        customerRetention, growthRate,
+                        bestSellingItem, bestSellingQuantity
+                    ));
+                    
+                } catch (Exception e) {
+                    logger.log(Level.SEVERE, "❌ Error updating KPI card labels", e);
+                }
+            });
+            
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "❌ Error calculating KPI metrics", e);
+            showErrorState();
         }
-        
-        if (totalRevenueLabel != null) {
-            totalRevenueLabel.setText(String.format("₱%,.0f", totalRevenue));
-        }
-        
-        if (avgOrderValueLabel != null) {
-            avgOrderValueLabel.setText(String.format("₱%.1f", avgOrderValue));
-        }
-        
-        if (completionRateLabel != null) {
-            completionRateLabel.setText(String.format("%.1f%%", completionRate));
-        }
-        
-        if (bestSellingItemLabel != null) {
-            bestSellingItemLabel.setText(bestSellingItem);
-        }
-        
-        if (customerRetentionLabel != null) {
-            customerRetentionLabel.setText(String.format("%.0f%%", customerRetention));
-        }
-        
-        if (growthRateLabel != null) {
-            String growthText = growthRate >= 0 ? String.format("+%.1f%%", growthRate) : String.format("%.1f%%", growthRate);
-            growthRateLabel.setText(growthText);
-        }
-        
-        logger.info("💰 Analytics: " + totalOrders + " orders, ₱" + String.format("%.0f", totalRevenue) + " revenue, " + String.format("%.1f%%", completionRate) + " completion rate");
+    }
+
+    /**
+     * Calculate the previous period date range based on current period
+     */
+    private LocalDate[] getPreviousPeriod(LocalDate currentStart, LocalDate currentEnd) {
+        long daysBetween = currentEnd.toEpochDay() - currentStart.toEpochDay() + 1;
+        LocalDate previousEnd = currentStart.minusDays(1);
+        LocalDate previousStart = previousEnd.minusDays(daysBetween - 1);
+        return new LocalDate[]{previousStart, previousEnd};
     }
 
     /**
@@ -366,45 +485,119 @@ public class AnalyticsController implements Initializable {
     }
 
     /**
-     * Update revenue per flavor pie chart using filtered sales data
+     * Update the revenue by flavor pie chart
+     * Shows revenue distribution across different waffle flavors
      */
     private void updateRevenueFlavorChart() {
-        if (revenueFlavorChart == null) return;
+        logger.info("🥧 Updating revenue by flavor chart...");
         
         try {
-            revenueFlavorChart.getData().clear();
-            
-            // Get filtered sales for current time period
+            if (revenueFlavorChart == null) {
+                logger.severe("❌ Revenue flavor chart is null - FXML injection failed");
+                return;
+            }
+
+            // Get filtered sales based on time period
             List<SalesRecord> filteredSales = getFilteredSales();
             
-            // Calculate revenue by flavor from filtered sales data
-            Map<String, Double> flavorRevenue = new HashMap<>();
+            // Map to store revenue by flavor
+            Map<String, Double> revenueByFlavor = new HashMap<>();
             
+            // Process each sale
             for (SalesRecord sale : filteredSales) {
                 String[] items = sale.getItemsSold().split(";");
-                double saleAmount = parseAmount(sale.getSaleAmount());
-                double itemValue = saleAmount / items.length; // Approximate per item
-                
                 for (String item : items) {
-                    String flavor = extractFlavorName(item.trim());
-                    flavorRevenue.put(flavor, flavorRevenue.getOrDefault(flavor, 0.0) + itemValue);
+                    item = item.trim();
+                    if (!item.isEmpty()) {
+                        int quantity = extractQuantity(item);
+                        String flavorName = extractFlavorName(item);
+                        
+                        // Calculate revenue for this item
+                        double price = 0.0;
+                        if (flavorName.equals("S'morelicious") || flavorName.equals("Tropiham")) {
+                            price = 55.00;
+                        } else {
+                            price = 45.00;
+                        }
+                        
+                        double revenue = quantity * price;
+                        revenueByFlavor.merge(flavorName, revenue, Double::sum);
+                    }
                 }
             }
             
-            // Add to pie chart
-            flavorRevenue.entrySet().stream()
-                .sorted(Map.Entry.<String, Double>comparingByValue().reversed())
-                .limit(8) // Top 8 flavors
-                .forEach(entry -> {
-                    PieChart.Data slice = new PieChart.Data(
-                        entry.getKey() + " (₱" + String.format("%.0f", entry.getValue()) + ")",
-                        entry.getValue()
-                    );
-                    revenueFlavorChart.getData().add(slice);
+            // Clear existing data
+            revenueFlavorChart.getData().clear();
+            
+            // Create pie chart data
+            for (Map.Entry<String, Double> entry : revenueByFlavor.entrySet()) {
+                PieChart.Data slice = new PieChart.Data(
+                    String.format("%s (₱%.2f)", entry.getKey(), entry.getValue()),
+                    entry.getValue()
+                );
+                revenueFlavorChart.getData().add(slice);
+            }
+            
+            // Style the chart
+            revenueFlavorChart.setStyle("-fx-font-family: 'Inter Medium';");
+            revenueFlavorChart.setLegendVisible(false);
+            revenueFlavorChart.setLabelsVisible(true);
+            revenueFlavorChart.setAnimated(true);
+            revenueFlavorChart.setTitle(null);  // Remove title since we have a label
+            
+            // Add hover effect and tooltips for better UX
+            revenueFlavorChart.getData().forEach(data -> {
+                String styleClass = "pie-chart-" + data.getName().toLowerCase().replaceAll("[^a-z]", "");
+                data.getNode().getStyleClass().add(styleClass);
+                
+                Tooltip tooltip = new Tooltip(String.format(
+                    "%s%n₱%.2f (%.1f%%)",
+                    data.getName().split(" \\(")[0],
+                    data.getPieValue(),
+                    (data.getPieValue() / revenueByFlavor.values().stream().mapToDouble(Double::doubleValue).sum()) * 100
+                ));
+                Tooltip.install(data.getNode(), tooltip);
+                
+                data.getNode().setOnMouseEntered(e -> {
+                    data.getNode().setStyle("-fx-pie-color: derive(" + data.getNode().getStyle() + ", 20%);");
                 });
+                data.getNode().setOnMouseExited(e -> {
+                    data.getNode().setStyle("");
+                });
+            });
+            
+            logger.info("✅ Revenue by flavor chart updated with " + revenueByFlavor.size() + " flavors");
             
         } catch (Exception e) {
-            logger.log(Level.WARNING, "Error updating revenue flavor chart", e);
+            logger.log(Level.SEVERE, "❌ Error updating revenue by flavor chart", e);
+            revenueFlavorChart.getData().clear();
+            revenueFlavorChart.setTitle("Revenue by Flavor - Error Loading Data");
+        }
+    }
+
+    /**
+     * Extract the flavor name from an item string
+     * Example: "2x Tropiham" returns "Tropiham"
+     */
+    private String extractFlavorName(String item) {
+        try {
+            return item.substring(item.indexOf("x") + 1).trim();
+        } catch (Exception e) {
+            logger.warning("⚠️ Error extracting flavor name from: " + item);
+            return "Unknown";
+        }
+    }
+
+    /**
+     * Extract the quantity from an item string
+     * Example: "2x Tropiham" returns 2
+     */
+    private int extractQuantity(String item) {
+        try {
+            return Integer.parseInt(item.substring(0, item.indexOf("x")).trim());
+        } catch (Exception e) {
+            logger.warning("⚠️ Error extracting quantity from: " + item);
+            return 0;
         }
     }
 
@@ -555,33 +748,6 @@ public class AnalyticsController implements Initializable {
         }
     }
 
-    private String extractFlavorName(String item) {
-        try {
-            // Handle formats like "5x Tropiham" or "Tropiham x5"
-            String cleaned = item.replaceAll("\\d+x\\s*", "").replaceAll("\\s*x\\s*\\d+", "").trim();
-            return cleaned.isEmpty() ? "Unknown" : cleaned;
-        } catch (Exception e) {
-            return "Unknown";
-        }
-    }
-
-    private int extractQuantity(String item) {
-        try {
-            if (item.contains("x")) {
-                String[] parts = item.split("x");
-                for (String part : parts) {
-                    String trimmed = part.trim();
-                    if (trimmed.matches("\\d+")) {
-                        return Integer.parseInt(trimmed);
-                    }
-                }
-            }
-            return 1; // Default quantity
-        } catch (Exception e) {
-            return 1;
-        }
-    }
-
     private String findBestSellingItem(List<SalesRecord> salesData) {
         Map<String, Integer> itemCounts = new HashMap<>();
         
@@ -701,7 +867,13 @@ public class AnalyticsController implements Initializable {
         
         switch (timePeriod) {
             case "This Week":
-                start = now.minusDays(now.getDayOfWeek().getValue() - 1); // Monday
+                // Get the most recent Monday (or today if it's Monday)
+                start = now.minusDays(now.getDayOfWeek().getValue() - 1);
+                // If start date is in the future (due to week starting on Monday),
+                // adjust it to the previous week
+                if (start.isAfter(now)) {
+                    start = start.minusWeeks(1);
+                }
                 break;
             case "Last 7 Days":
                 start = now.minusDays(6);
@@ -722,11 +894,12 @@ public class AnalyticsController implements Initializable {
                 start = now.withDayOfYear(1);
                 break;
             default:
-                // Default to last 30 days
+                logger.warning("⚠️ Unknown time period: " + timePeriod + ", defaulting to Last 30 Days");
                 start = now.minusDays(29);
                 break;
         }
         
+        logger.info("📅 Date range for " + timePeriod + ": " + start + " to " + end);
         return new LocalDate[]{start, end};
     }
     
@@ -786,23 +959,30 @@ public class AnalyticsController implements Initializable {
     public void refreshDataForTimePeriod(String timePeriod) {
         logger.info("📅 Refreshing analytics for time period: " + timePeriod);
         
-        Platform.runLater(() -> {
-            try {
-                currentTimePeriod = timePeriod;
-                
-                // Reload data from files
-                dataService.refreshData();
-                allOrders = dataService.getAllOrders();
-                allSales = dataService.getAllSales();
-                
-                // Filter data based on time period and recalculate analytics
-                calculateAndDisplayAnalytics();
-                
-                logger.info("✅ Analytics refreshed successfully for period: " + timePeriod);
-            } catch (Exception e) {
-                logger.log(Level.SEVERE, "❌ Error refreshing analytics for time period: " + timePeriod, e);
-                showErrorState();
-            }
-        });
+        try {
+            // Update current time period first
+            currentTimePeriod = timePeriod;
+            
+            // Reload data from files
+            dataService.refreshData();
+            allOrders = dataService.getAllOrders();
+            allSales = dataService.getAllSales();
+            
+            // Calculate and display analytics immediately
+            calculateAndDisplayAnalytics();
+            
+            logger.info("✅ Analytics refreshed successfully for period: " + timePeriod);
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "❌ Error refreshing analytics for time period: " + timePeriod, e);
+            showErrorState();
+        }
+    }
+
+    /**
+     * Get the DataService instance used by this controller
+     * @return The DataService instance
+     */
+    public DataService getDataService() {
+        return dataService;
     }
 }

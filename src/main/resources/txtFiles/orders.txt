@@ -1,5 +1,8 @@
 # Format: Order ID, Name, Contact Number, Items Ordered, Total Items, Total Amount, Payment Method, Date and Time, Status, Reference Number, Timestamp
-WP20250624-011,marj,091241414,"4x Spicy tunasaur; 4x Pimiento",8,₱360.00,GCash,"Jun 24, 2025 11:39 PM",In Progress,"Paid","453553"
+WP20250706-001,sameer,09123456789,"3x Spicy tunasaur; 4x Oreo-verload",7,₱315.00,GCash,"Jul 6, 2025 2:49 PM",Completed,"GCASHSAHAHS","07/06/2025 2:00 PM"
+WP20250704-002,anonnnn,091231313,"3x Eggmayoza; 3x Pimiento",6,₱270.00,Maya,"Jul 4, 2025 6:33 AM",Completed,"MYA93242","06/04/2025 6:00 AM"
+WP20250704-001,anonnn,0912314314,"5x Spicy tunasaur; 3x Tropiham",8,₱390.00,GCash,"Jul 4, 2025 6:25 AM",Completed,"GCasdada","07/04/2025 8:00 AM"
+WP20250624-011,marj,091241414,"4x Spicy tunasaur; 4x Pimiento",8,₱360.00,GCash,"Jun 24, 2025 11:39 PM",Pending,"Paid","453553"
 WP20250624-010,Anna Cruz,09111222333,"3x Tropiham; 2x Berry on top",5,₱255.00,Cash,"Jun 24, 2025 11:30 PM",In Progress,"Paid",""
 WP20250624-009,Peter Tan,09444555666,"4x Spicy tunasaur; 1x Oreo-verload",5,₱225.00,GCash,"Jun 24, 2025 11:15 PM",Pending,"Unpaid","GC789123456"
 WP20250624-008,Lisa Wong,09777888999,"2x Eggmayoza; 3x Pimiento",5,₱225.00,Maya,"Jun 24, 2025 10:45 PM",Completed,"Paid","MY987654321"

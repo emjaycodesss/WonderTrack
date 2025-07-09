@@ -1,4 +1,5 @@
-Spicy Waffles|banana|so sweet|₱50.00
+Sweet Waffles|S'morelicious|Marshmallow, graham, and chocolate burst|₱55.00
+Sweet Waffles|Oreo-verload|Crushed Oreo with chocolate drizzle|₱45.00
 Savory Waffles|Tropiham|Ham and pineapple with grated cheese and a touch of ketchup|₱55.00
 Spicy Waffles|Spicy tunasaur|A creamy, spicy tuna mix blended with mayonnaise for a bold and savory flavor|₱45.00
 Spicy Waffles|Pimiento|Creamy bell pepper mix with melted cheese, cream cheese, and a hint of butter.|₱45.00

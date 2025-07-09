@@ -206,7 +206,7 @@
                            <Font size="15.0" />
                         </font>
                      </Label>
-                     <PieChart prefHeight="300.0" VBox.vgrow="ALWAYS" />
+                     <PieChart fx:id="revenueFlavorChart" prefHeight="300.0" VBox.vgrow="ALWAYS" />
                   </children>
                </VBox>
             </children>

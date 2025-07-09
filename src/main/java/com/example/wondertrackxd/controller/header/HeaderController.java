@@ -54,6 +54,9 @@ public class HeaderController {
     
     // Reference to AnalyticsController for real-time updates
     private static AnalyticsController analyticsController;
+    
+    // Reference to SalesController for real-time updates
+    private static com.example.wondertrackxd.controller.sales.SalesController salesController;
 
     private static final double EXPANDED_WIDTH = 215.0;
     private static final Duration ANIMATION_DURATION = Duration.millis(200);
@@ -90,6 +93,15 @@ public class HeaderController {
     public static void setAnalyticsController(AnalyticsController controller) {
         analyticsController = controller;
         logger.info("🔗 AnalyticsController reference set for real-time updates");
+    }
+    
+    /**
+     * Set the SalesController reference for real-time updates
+     * @param controller The SalesController instance
+     */
+    public static void setSalesController(com.example.wondertrackxd.controller.sales.SalesController controller) {
+        salesController = controller;
+        logger.info("🔗 SalesController reference set for real-time updates");
     }
     
     /**
@@ -371,5 +383,21 @@ public class HeaderController {
         } catch (Exception e) {
             logger.log(Level.SEVERE, "❌ Error during header animation", e);
         }
+    }
+
+    /**
+     * Get the SalesController instance
+     * @return The current SalesController instance
+     */
+    public static com.example.wondertrackxd.controller.sales.SalesController getSalesController() {
+        return salesController;
+    }
+
+    /**
+     * Get the AnalyticsController instance
+     * @return The current AnalyticsController instance
+     */
+    public static AnalyticsController getAnalyticsController() {
+        return analyticsController;
     }
 }

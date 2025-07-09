@@ -30,8 +30,8 @@ import java.io.InputStreamReader;
 import com.example.wondertrackxd.controller.products.ProductManagementController;
 
 /**
- * Controller for the Overview page that handles the recent orders table display
- * Manages MFX TableView population and column configuration with proper styling
+ * Controller for the Products page that handles the product catalog display
+ * Manages product categories and items with proper styling
  */
 public class ProductsController {
 
@@ -58,6 +58,13 @@ public class ProductsController {
         try {
             setupEventHandlers();
             refreshProductsView();
+            
+            // Register for real-time updates from ProductManagementController
+            ProductManagementController.registerDataChangeCallback(() -> {
+                logger.info("📡 Received data change notification, refreshing products view...");
+                refreshProductsView();
+            });
+            
             logger.info("✅ Products Controller initialized successfully");
         } catch (Exception e) {
             logger.log(Level.SEVERE, "❌ Error during Products Controller initialization", e);
@@ -93,8 +100,8 @@ public class ProductsController {
             
             logger.info("✅ Product Management window created successfully");
             
+            // No need to manually refresh - we have automatic updates now
             stage.showAndWait();
-            refreshProductsView();
             
         } catch (IOException e) {
             logger.log(Level.SEVERE, "❌ Error opening product management window", e);
@@ -113,18 +120,25 @@ public class ProductsController {
             logger.info("🧹 Clearing existing content...");
             categoriesContainer.getChildren().clear();
             
-            // Load categories and products
+            // 1️⃣ Load persisted categories (may include empty ones)
             logger.info("📂 Loading categories...");
-            List<String> categories = loadCategories();
-            logger.info("📋 Loaded " + categories.size() + " categories");
-            
+            List<String> persistedCategories = loadCategories();
+            logger.info("📋 Loaded " + persistedCategories.size() + " persisted categories");
+
+            // 2️⃣ Load products and group them by category
             logger.info("📂 Loading products...");
             Map<String, List<ProductManagementController.ProductItem>> productsByCategory = loadProducts();
             logger.info("📋 Loaded products for " + productsByCategory.size() + " categories");
-            
-            // Create category sections
-            for (String category : categories) {
-                List<ProductManagementController.ProductItem> products = productsByCategory.getOrDefault(category, new ArrayList<>());
+
+            // 3️⃣ Build ordered category list: start with persisted categories, then add any new ones from products
+            LinkedHashSet<String> orderedCategories = new LinkedHashSet<>(persistedCategories);
+            orderedCategories.addAll(productsByCategory.keySet()); // preserves existing order, appends new
+
+            logger.info("📋 Final category list contains " + orderedCategories.size() + " categories");
+
+            // 4️⃣ Create category sections – ALWAYS create section, even if it has zero products
+            for (String category : orderedCategories) {
+                List<ProductManagementController.ProductItem> products = productsByCategory.getOrDefault(category, Collections.emptyList());
                 logger.info("📦 Creating section for category '" + category + "' with " + products.size() + " products");
                 VBox categorySection = createCategorySection(category, products);
                 categoriesContainer.getChildren().add(categorySection);
@@ -140,93 +154,109 @@ public class ProductsController {
     private List<String> loadCategories() throws IOException {
         logger.info("📂 Loading categories from file...");
         
+        List<String> categories = new ArrayList<>();
+        
+        // First try loading from file system
         try {
-            List<String> categories = Files.readAllLines(Paths.get(CATEGORIES_FILE))
+            categories = Files.readAllLines(Paths.get(CATEGORIES_FILE))
                 .stream()
-                .filter(line -> !line.trim().isEmpty())
+                .map(String::trim)
+                .filter(line -> !line.isEmpty())
                 .collect(Collectors.toList());
                 
-            logger.info("✅ Successfully loaded " + categories.size() + " categories");
-            return categories;
+            if (!categories.isEmpty()) {
+                logger.info("✅ Successfully loaded " + categories.size() + " categories from file system");
+                return categories;
+            }
         } catch (IOException e) {
-            logger.warning("⚠️ Categories file not found at " + CATEGORIES_FILE + ", trying fallback...");
-            
-            // Fallback to resource loading if file doesn't exist
-            try (InputStream is = getClass().getResourceAsStream("/txtFiles/categories.txt")) {
-                if (is == null) {
-                    logger.warning("⚠️ Categories file not found in resources either");
-                    return new ArrayList<>();
-                }
-                
+            logger.warning("⚠️ Could not load categories from file system, trying resource stream...");
+        }
+        
+        // Fallback to resource loading
+        try (InputStream is = getClass().getResourceAsStream("/txtFiles/categories.txt")) {
+            if (is != null) {
                 try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
-                    List<String> categories = reader.lines()
-                        .filter(line -> !line.trim().isEmpty())
+                    categories = reader.lines()
+                        .map(String::trim)
+                        .filter(line -> !line.isEmpty())
                         .collect(Collectors.toList());
                         
                     logger.info("✅ Successfully loaded " + categories.size() + " categories from resources");
-                    return categories;
                 }
+            } else {
+                logger.warning("⚠️ Categories resource not found");
             }
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "❌ Error loading categories from resources", e);
         }
+        
+        return categories;
     }
     
     private Map<String, List<ProductManagementController.ProductItem>> loadProducts() throws IOException {
         logger.info("📂 Loading products from file...");
         
+        Map<String, List<ProductManagementController.ProductItem>> productsByCategory = new HashMap<>();
+        
+        // First try loading from file system
         try {
-            Map<String, List<ProductManagementController.ProductItem>> productsByCategory = Files.readAllLines(Paths.get(PRODUCTS_FILE))
+            List<String> lines = Files.readAllLines(Paths.get(PRODUCTS_FILE))
                 .stream()
-                .filter(line -> !line.trim().isEmpty())
-                .map(line -> {
-                    String[] parts = line.split("\\|");
-                    if (parts.length == 4) {
-                        return new ProductManagementController.ProductItem(
-                            parts[0].trim(), // category
-                            parts[1].trim(), // name
-                            parts[2].trim(), // description
-                            parts[3].trim()  // price
-                        );
-                    }
-                    return null;
-                })
-                .filter(Objects::nonNull)
-                .collect(Collectors.groupingBy(ProductManagementController.ProductItem::getCategory));
+                .map(String::trim)
+                .filter(line -> !line.isEmpty())
+                .collect(Collectors.toList());
                 
-            logger.info("✅ Successfully loaded products for " + productsByCategory.size() + " categories");
-            return productsByCategory;
-        } catch (IOException e) {
-            logger.warning("⚠️ Products file not found at " + PRODUCTS_FILE + ", trying fallback...");
-            
-            // Fallback to resource loading if file doesn't exist
-            try (InputStream is = getClass().getResourceAsStream("/txtFiles/products.txt")) {
-                if (is == null) {
-                    logger.warning("⚠️ Products file not found in resources either");
-                    return new HashMap<>();
-                }
-                
-                try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
-                    Map<String, List<ProductManagementController.ProductItem>> productsByCategory = reader.lines()
-                        .filter(line -> !line.trim().isEmpty())
-                        .map(line -> {
-                            String[] parts = line.split("\\|");
-                            if (parts.length == 4) {
-                                return new ProductManagementController.ProductItem(
-                                    parts[0].trim(), // category
-                                    parts[1].trim(), // name
-                                    parts[2].trim(), // description
-                                    parts[3].trim()  // price
-                                );
-                            }
-                            return null;
-                        })
-                        .filter(Objects::nonNull)
-                        .collect(Collectors.groupingBy(ProductManagementController.ProductItem::getCategory));
-                        
-                    logger.info("✅ Successfully loaded products for " + productsByCategory.size() + " categories from resources");
-                    return productsByCategory;
-                }
+            if (!lines.isEmpty()) {
+                productsByCategory = parseProductLines(lines);
+                logger.info("✅ Successfully loaded products from file system");
+                return productsByCategory;
             }
+        } catch (IOException e) {
+            logger.warning("⚠️ Could not load products from file system, trying resource stream...");
         }
+        
+        // Fallback to resource loading
+        try (InputStream is = getClass().getResourceAsStream("/txtFiles/products.txt")) {
+            if (is != null) {
+                try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
+                    List<String> lines = reader.lines()
+                        .map(String::trim)
+                        .filter(line -> !line.isEmpty())
+                        .collect(Collectors.toList());
+                        
+                    productsByCategory = parseProductLines(lines);
+                    logger.info("✅ Successfully loaded products from resources");
+                }
+            } else {
+                logger.warning("⚠️ Products resource not found");
+            }
+        } catch (IOException e) {
+            logger.log(Level.SEVERE, "❌ Error loading products from resources", e);
+        }
+        
+        return productsByCategory;
+    }
+    
+    private Map<String, List<ProductManagementController.ProductItem>> parseProductLines(List<String> lines) {
+        return lines.stream()
+            .map(line -> {
+                String[] parts = line.split("\\|");
+                if (parts.length == 4) {
+                    return new ProductManagementController.ProductItem(
+                        parts[0].trim(),
+                        parts[1].trim(),
+                        parts[2].trim(),
+                        parts[3].trim()
+                    );
+                }
+                logger.warning("⚠️ Invalid product line format: " + line);
+                return null;
+            })
+            .filter(Objects::nonNull)
+            .collect(Collectors.groupingBy(
+                ProductManagementController.ProductItem::getCategory,
+                Collectors.toList()
+            ));
     }
     
     private VBox createCategorySection(String categoryName, List<ProductManagementController.ProductItem> products) {

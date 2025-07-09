@@ -31,4 +31,8 @@ module com.example.wondertrackxd {
     opens com.example.wondertrackxd.controller.settings to javafx.fxml;
     exports com.example.wondertrackxd.controller.sales;
     opens com.example.wondertrackxd.controller.sales to javafx.fxml;
+
+    // Model package exports and opens for JavaFX property access
+    exports com.example.wondertrackxd.controller.model;
+    opens com.example.wondertrackxd.controller.model to javafx.base, javafx.fxml;
 }

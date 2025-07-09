@@ -1,5 +1,9 @@
 package com.example.wondertrackxd.controller.model;
 
+import com.example.wondertrackxd.controller.analytics.DataService;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * SalesRecord Model Class for WonderTrackXd POS System
  * Represents completed sales transactions for revenue analytics
@@ -268,8 +272,8 @@ public class SalesRecord {
      * @return New SalesRecord representing the completed sale
      */
     public static SalesRecord fromOrder(RecentOrder order) {
-        // Generate sales ID by replacing WP with WPS
-        String saleId = order.getOrderId().replace("WP", "WPS");
+        // Generate sequential sale ID (S001, S002, etc.)
+        String saleId = generateNextSaleId();
         
         // Determine cash received based on payment method
         String cashReceived = "0.00";
@@ -282,18 +286,49 @@ public class SalesRecord {
         }
         
         return new SalesRecord(
-                saleId,
-                order.getOrderId(),
-                order.getName(),
-                order.getContactNumber(),
-                order.getItemsOrdered(),
-                order.getTotalItems(),
-                order.getTotalAmount(),
-                order.getPaymentMethod(),
-                order.getOrderDate(),
-                order.getReferenceNumber() != null ? order.getReferenceNumber() : "",
-                cashReceived
+                saleId,                  // Sale ID (now S001, S002, etc.)
+                order.getOrderId(),      // Original order ID (WP...)
+                order.getName(),         // Customer name
+                order.getContactNumber(),// Contact number
+                order.getItemsOrdered(), // Items ordered
+                order.getTotalItems(),   // Total items
+                order.getTotalAmount(),  // Sale amount
+                order.getPaymentMethod(),// Payment method
+                order.getOrderDate(),    // Sale date/time
+                order.getReferenceNumber() != null ? order.getReferenceNumber() : "", // Payment reference
+                cashReceived             // Cash received
         );
+    }
+
+    /**
+     * Generate the next sequential sale ID
+     * Format: S001, S002, etc.
+     * @return Next sale ID in sequence
+     */
+    private static String generateNextSaleId() {
+        try {
+            DataService dataService = new DataService();
+            dataService.loadSalesData(); // Load current sales data
+            
+            List<String> existingSaleIds = dataService.getAllSales()
+                .stream()
+                .map(SalesRecord::getSaleId)
+                .filter(id -> id.matches("S\\d{3}"))
+                .sorted()
+                .collect(Collectors.toList());
+
+            if (existingSaleIds.isEmpty()) {
+                return "S001";
+            }
+
+            // Get the last ID and increment
+            String lastId = existingSaleIds.get(existingSaleIds.size() - 1);
+            int nextNumber = Integer.parseInt(lastId.substring(1)) + 1;
+            return String.format("S%03d", nextNumber);
+        } catch (Exception e) {
+            // If anything goes wrong, return a fallback ID
+            return "S" + System.currentTimeMillis();
+        }
     }
 
     /**
