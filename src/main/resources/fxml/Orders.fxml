@@ -372,13 +372,13 @@
             </HBox>
             <TableView fx:id="ordersTable" maxHeight="320.0" maxWidth="Infinity" minHeight="280.0" prefHeight="300.0" styleClass="recent-orders-table" stylesheets="@../css/new-table-style.css" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS">
                <columns>
-                  <TableColumn fx:id="orderIdColumn" minWidth="120.0" prefWidth="140.0" text="Order ID" />
+                  <TableColumn fx:id="orderIdColumn" minWidth="80.0" prefWidth="100.0" text="Order ID" />
                   <TableColumn fx:id="nameColumn" minWidth="60.0" prefWidth="80.0" text="Name" />
-                  <TableColumn fx:id="contactNumberColumn" minWidth="100.0" prefWidth="120.0" text="Contact Number" />
-                  <TableColumn fx:id="totalAmountColumn" minWidth="80.0" prefWidth="100.0" text="Total Amount" />
-                  <TableColumn fx:id="dateTimeColumn" minWidth="120.0" prefWidth="140.0" text="Date &amp; Time" />
-                  <TableColumn fx:id="orderStatusColumn" minWidth="120.0" prefWidth="120.0" styleClass="status-column" text="Order Status" />
-                  <TableColumn fx:id="actionsColumn" minWidth="120.0" prefWidth="200.0" styleClass="actions-column" text="Actions" />
+                  <TableColumn fx:id="contactNumberColumn" minWidth="80.0" prefWidth="100.0" text="Contact" />
+                  <TableColumn fx:id="totalAmountColumn" minWidth="70.0" prefWidth="80.0" text="Amount" />
+                  <TableColumn fx:id="dateTimeColumn" minWidth="90.0" prefWidth="110.0" text="Date &amp; Time" />
+                  <TableColumn fx:id="orderStatusColumn" minWidth="90.0" prefWidth="110.0" styleClass="status-column" text="Status" />
+                  <TableColumn fx:id="actionsColumn" minWidth="100.0" prefWidth="120.0" styleClass="actions-column" text="Actions" />
                </columns>
             </TableView>
             <HBox alignment="CENTER" spacing="15.0">

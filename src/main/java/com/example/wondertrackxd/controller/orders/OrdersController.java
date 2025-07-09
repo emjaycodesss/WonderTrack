@@ -382,7 +382,7 @@ public class OrdersController {
             contactNumberColumn.setCellValueFactory(cellData -> cellData.getValue().contactNumberProperty());
             totalAmountColumn.setCellValueFactory(cellData -> cellData.getValue().totalAmountProperty());
             dateTimeColumn.setCellValueFactory(cellData -> cellData.getValue().orderDateProperty());
-        orderStatusColumn.setCellValueFactory(cellData -> cellData.getValue().orderStatusProperty());
+            orderStatusColumn.setCellValueFactory(cellData -> cellData.getValue().orderStatusProperty());
             
         // Set up comprehensive editable status columns with styled ComboBox
         setupOrderStatusColumn();
@@ -391,7 +391,7 @@ public class OrdersController {
             actionsColumn.setCellFactory(col -> {
                 TableCell<RecentOrder, Void> cell = new TableCell<>() {
                     private final Button editButton = new Button();
-                    private final Button viewReceiptBtn = new Button("View Receipt");
+                    private final Button viewReceiptBtn = new Button("View");
                     private final HBox container;
                     
                     {
@@ -413,8 +413,8 @@ public class OrdersController {
                         });
                         // Match overview styling - simple button without custom styling
                         
-                        // Create container for both buttons with proper spacing
-                        container = new HBox(8);
+                        // Create container for both buttons with compact spacing
+                        container = new HBox(4);
                         container.setAlignment(Pos.CENTER_LEFT);
                         container.getChildren().addAll(editButton, viewReceiptBtn);
                         
@@ -438,7 +438,10 @@ public class OrdersController {
             // Set table as editable and bind to filtered data
             ordersTable.setItems(filteredOrders);
             
-            // Setup responsive column width management for exactly 6 columns
+            // Ensure table fits within container width
+            ordersTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+            
+            // Setup responsive column width management for exactly 7 columns
             ordersTable.widthProperty().addListener((obs, oldVal, newVal) -> {
                 double width = newVal.doubleValue();
                 if (width > 0) {
@@ -449,13 +452,24 @@ public class OrdersController {
 
                     if (width > totalMinWidth) {
                         double remainingWidth = width - totalMinWidth;
-                        orderIdColumn.setPrefWidth(orderIdColumn.getMinWidth() + (remainingWidth * 0.12));
-                        nameColumn.setPrefWidth(nameColumn.getMinWidth() + (remainingWidth * 0.15));
-                        contactNumberColumn.setPrefWidth(contactNumberColumn.getMinWidth() + (remainingWidth * 0.15));
-                        totalAmountColumn.setPrefWidth(totalAmountColumn.getMinWidth() + (remainingWidth * 0.13));
-                        dateTimeColumn.setPrefWidth(dateTimeColumn.getMinWidth() + (remainingWidth * 0.20));
+                        // Distribute remaining width proportionally to prevent horizontal scrolling
+                        // Use more conservative distribution to ensure fit
+                        orderIdColumn.setPrefWidth(orderIdColumn.getMinWidth() + (remainingWidth * 0.13));
+                        nameColumn.setPrefWidth(nameColumn.getMinWidth() + (remainingWidth * 0.10));
+                        contactNumberColumn.setPrefWidth(contactNumberColumn.getMinWidth() + (remainingWidth * 0.13));
+                        totalAmountColumn.setPrefWidth(totalAmountColumn.getMinWidth() + (remainingWidth * 0.08));
+                        dateTimeColumn.setPrefWidth(dateTimeColumn.getMinWidth() + (remainingWidth * 0.16));
                         orderStatusColumn.setPrefWidth(orderStatusColumn.getMinWidth() + (remainingWidth * 0.15));
-                        actionsColumn.setPrefWidth(actionsColumn.getMinWidth() + (remainingWidth * 0.20)); // Increased for two buttons
+                        actionsColumn.setPrefWidth(actionsColumn.getMinWidth() + (remainingWidth * 0.15)); // Space for two buttons
+                    } else {
+                        // If container is too narrow, use minimum widths
+                        orderIdColumn.setPrefWidth(orderIdColumn.getMinWidth());
+                        nameColumn.setPrefWidth(nameColumn.getMinWidth());
+                        contactNumberColumn.setPrefWidth(contactNumberColumn.getMinWidth());
+                        totalAmountColumn.setPrefWidth(totalAmountColumn.getMinWidth());
+                        dateTimeColumn.setPrefWidth(dateTimeColumn.getMinWidth());
+                        orderStatusColumn.setPrefWidth(orderStatusColumn.getMinWidth());
+                        actionsColumn.setPrefWidth(actionsColumn.getMinWidth());
                     }
                 }
             });
@@ -505,9 +519,9 @@ public class OrdersController {
                         // Initialize ComboBox with status options
                         comboBox = new ComboBox<>(orderStatusOptions);
                         comboBox.setMaxWidth(Double.MAX_VALUE);
-                        comboBox.setPrefWidth(115);
-                        comboBox.setMinWidth(110);
-                        comboBox.setStyle("-fx-font-size: 11px; -fx-font-weight: bold; -fx-background-color: white; " +
+                        comboBox.setPrefWidth(100);
+                        comboBox.setMinWidth(90);
+                        comboBox.setStyle("-fx-font-size: 13px; -fx-font-weight: bold; -fx-background-color: white; " +
                                         "-fx-border-color: #ddd; -fx-border-width: 1px; -fx-border-radius: 3px; " +
                                         "-fx-background-radius: 3px; -fx-padding: 3px 6px;");
                         
@@ -550,7 +564,7 @@ public class OrdersController {
                                         default -> "#6B7280";             // Gray
                                     };
                                     setStyle("-fx-text-fill: " + textColor + "; -fx-font-weight: bold; " +
-                                            "-fx-font-size: 11px; -fx-padding: 2px 4px;");
+                                            "-fx-font-size: 13px; -fx-padding: 2px 4px;");
                                 }
                             }
                         });
@@ -573,7 +587,7 @@ public class OrdersController {
                                         default -> "#6B7280";             // Gray
                                     };
                                     setStyle("-fx-text-fill: " + textColor + "; -fx-font-weight: bold; " +
-                                            "-fx-font-size: 11px; -fx-padding: 2px 4px;");
+                                            "-fx-font-size: 13px; -fx-padding: 2px 4px;");
                                 }
                             }
                         });
@@ -596,8 +610,8 @@ public class OrdersController {
             
             orderStatusColumn.setEditable(false);
             orderStatusColumn.setSortable(true);
-            orderStatusColumn.setMinWidth(110);
-            orderStatusColumn.setPrefWidth(120);
+            orderStatusColumn.setMinWidth(90);
+            orderStatusColumn.setPrefWidth(110);
             
             logger.info("✅ Order status column setup completed with real-time updates");
             
@@ -723,7 +737,7 @@ public class OrdersController {
         if (status == null) return;
         
         // Base styling without background colors - only padding, font styling
-        String baseStyle = "-fx-padding: 5px 8px; -fx-font-weight: bold; -fx-font-size: 11px; -fx-alignment: center;";
+        String baseStyle = "-fx-padding: 5px 8px; -fx-font-weight: bold; -fx-font-size: 13px; -fx-alignment: center;";
         
         // Status-specific text colors only (no background or border colors)
         String statusStyle = switch (status) {
@@ -2350,8 +2364,8 @@ public class OrdersController {
                 case "Amount (Low to High)": 
                     return Double.compare(parseAmount(o1.getTotalAmount()), parseAmount(o2.getTotalAmount()));
                 case "Status": 
-                    String status1 = o1.getStatus();
-                    String status2 = o2.getStatus();
+                    String status1 = o1.getOrderStatus();
+                    String status2 = o2.getOrderStatus();
                     if (status1 == null && status2 == null) return 0;
                     if (status1 == null) return 1;
                     if (status2 == null) return -1;
